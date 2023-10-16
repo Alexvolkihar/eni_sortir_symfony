@@ -54,6 +54,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Site $site = null;
 
+    #[ORM\Column(length: 30, unique: true)]
+    private ?string $pseudo = null;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -255,6 +258,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSite(?Site $site): static
     {
         $this->site = $site;
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): static
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }
