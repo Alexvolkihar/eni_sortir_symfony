@@ -2,7 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=symfony,visualstudiocode,jetbrains,phpstorm,composer
 
 .env.local
-
+.idea/
 ### Composer ###
 composer.phar
 /vendor/
@@ -36,6 +36,7 @@ composer.phar
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+
 
 # Gradle
 .idea/**/gradle.xml

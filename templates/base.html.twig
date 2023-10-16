@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="Fr">
 	<head>
 		<meta charset="UTF-8">
 		<title>
@@ -15,11 +15,25 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body>
+	<header>
+		<a href="#">
+			<div class="div-flex">
+				<h2>Sortir</h2>
+			</div>
+		</a>
+		{% include 'menu/nav.html.twig' %}
+	</header>
+	<main>
+		{% for message in app.flashes('success') %}
+			<div class="flash flash-success">
+				{{ message }}
+			</div>
+		{% endfor %}
 		{% block body %}{% endblock %}
-		<h1 class="text-3xl font-bold underline bg-red-400">
-			Hello world!
-		</h1>
-	</body>
+	</main>
+
+	<footer>
+		<div>&copy;Bucket-List {{ "now" | date('Y') }}</div>
+	</footer>
 </html>
 <!--Cc -->

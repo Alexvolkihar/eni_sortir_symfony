@@ -1,0 +1,15 @@
+<nav>
+    <ul>
+        {% if app.user %}
+            {% if app.admin %}
+                <li><a href="{{ path('app_ville') }}">Ville</a></li>
+                <li><a href="{{ path('app_site') }}">Site</a></li>
+            {% else %}
+            <li><a href="{{ path('app_accueil') }}">Accueil</a></li>
+            <li><a href="{{ path('app_profil') }}">Mon profil</a></li>
+            <li><a href="{{ path('app_logout') }}">Se déconnecter</a></li>
+        {% else %}
+
+        {% endif %}
+    </ul>
+</nav>
