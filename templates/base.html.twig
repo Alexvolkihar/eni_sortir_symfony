@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="Fr">
 	<head>
 		<meta charset="UTF-8">
 		<title>
@@ -15,8 +15,21 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body>
+	<header>
+
+		{% include 'menu/nav.html.twig' %}
+	</header>
+	<main>
+		{% for message in app.flashes('success') %}
+			<div class="flash flash-success">
+				{{ message }}
+			</div>
+		{% endfor %}
 		{% block body %}{% endblock %}
-	</body>
+	</main>
+
+	<footer>
+		<div>&copy;Sortir {{ "now" | date('Y') }}</div>
+	</footer>
 </html>
 <!--Cc -->
