@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="flex justify-center items-center h-screen">
+    <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h1 class="text-center mb-6">Register</h1>
+
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm) }}
+            <div class="mb-4">
+                {{ form_row(registrationForm.email, {
+                    'attr': {
+                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                        'placeholder': 'Email'
+                    }
+                }) }}
+            </div>
+            <div class="mb-4">
+                {{ form_row(registrationForm.plainPassword, {
+                    'label': 'Mot de passe',
+                    'attr': {
+                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                        'placeholder': 'Mot de passe'
+                    }
+                }) }}
+            </div>
+            <div class="mb-4">
+                {{ form_row(registrationForm.name, {
+                    'label': 'Prénom',
+                    'attr': {
+                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                        'placeholder': 'Prénom'
+                    }
+                }) }}
+            </div>
+            <div class="mb-4">
+                {{ form_row(registrationForm.lastname, {
+                    'label': 'Nom',
+                    'attr': {
+                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                        'placeholder': 'Nom'
+                    }
+                }) }}
+            </div>
+            <div class="mb-4">
+                {{ form_row(registrationForm.phone, {
+                    'label': 'Téléphone',
+                    'attr': {
+                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                        'placeholder': 'Téléphone'
+                    }
+                }) }}
+            </div>
+            <div class="mb-4">
+                {{ form_row(registrationForm.pseudo, {
+                    'label': 'Pseudo',
+                    'attr': {
+                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                        'placeholder': 'Adresse'
+                    }
+                }) }}
+            </div>
+            <div class="mb-4">
+                {{ form_row(registrationForm.site, {
+                    'label': 'Site',
+                    'attr': {
+                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                        'placeholder': 'Site'
+                    }
+                }) }}
+            </div>
+            <div class="mb-6">
+                {{ form_row(registrationForm.isAdmin, {
+                    'label': 'Admin ?'
+                }) }}
+            </div>
+            <div class="mb-6">
+                {{ form_row(registrationForm.isActive, {
+                    'label': 'Active ?'
+                }) }}
+            </div>
+
+            <div class="mb-6">
+                {{ form_row(registrationForm.agreeTerms, {
+                    'label': 'J\'accepte les termes et conditions'
+                }) }}
+            </div>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('registration') }}"
+            >
+
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Register
+                </button>
+            </div>
+        {{ form_end(registrationForm) }}
+    </form>
+</div>
+{% endblock %}
