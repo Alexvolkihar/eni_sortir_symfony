@@ -10,13 +10,13 @@
             </a>
             <div class=" px-6 py-2 absolute right-3">
                 {% if app.user %}
-                    {% if app.admin %}
+                    {% if is_granted("ROLE_ADMIN") %}
                         <li><a href="{{ path('app_ville') }}">Ville</a></li>
                         <li><a href="{{ path('app_site') }}">Site</a></li>
                     {% else %}
-                        <a href="{{ path('app_accueil') }}" class="text-white rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Accueil</a>
-                        <a href="{{ path('app_profil') }}" class="text-white rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">profil</a>
-                        <a href="{{ path('app_logout') }}" class="text-white rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Se déconnecter</a>
+                        <a href="{{ path('app_home') }}" class="text-white rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Accueil</a>
+                        {# <a href="{{ path('app_profil') }}" class="text-white rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">profil</a> #}
+                        {# <a href="{{ path('app_logout') }}" class="text-white rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Se déconnecter</a> #}
 
                     {% endif %}
                 {% endif %}
