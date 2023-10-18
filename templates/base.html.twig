@@ -9,14 +9,6 @@
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
-			<style>
-				html, body, main {
-					height: 100%;
-					margin: 0;
-					padding: 0;
-					overflow: hidden;
-				}
-			</style>
 		{% endblock %}
 
 		{% block javascripts %}
@@ -36,8 +28,5 @@
 		{% block body %}{% endblock %}
 	</main>
 
-	<footer>
-		<div class="fixed bottom-0 left-0 z-8 w-full p-1 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-center md:p-3 dark:bg-gray-800 dark:border-gray-600">&copy;Sortir {{ "now" | date('Y') }}</div>
-	</footer>
 </html>
 <!--Cc -->

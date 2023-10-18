@@ -38,11 +38,15 @@
                 <p class="font-bold">Site:</p>
                 <p>{{ app.user.site }}</p>
             </div>#}
-            <div class="flex justify-center items-center mt-6">
-                <a href="{{ path('app_home') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Retour
-                </a>
-            </div>
+            <div class="flex items-center justify-between text-white font-bold">
+					<button class="bg-blue-500 hover:bg-blue-700  py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+												<a href="{{ path('profile_edit') }}">Editer profil</a>
+
+					</button>
+					<button class="bg-red-500 hover:bg-red-700 py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+						<a href="{{ path('app_home') }}">retour</a>
+					</button>
+				</div>
         </div>
     </div>
 </div>
