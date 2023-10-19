@@ -21,7 +21,7 @@ class EventController extends AbstractController
     }
 
 
-    #[Route(path: '/events', name: 'events_index')]
+    #[Route(path: '/', name: 'events_index')]
     public function index(EntityManagerInterface $entityManager, Request $request, EventRepository $eventRepository, UserRepository $userRepository): Response
     {
         $eventSearch = new Event();
@@ -34,10 +34,9 @@ class EventController extends AbstractController
         $eventsSearchForm->handleRequest($request);
 
         if ($eventsSearchForm->isSubmitted() && $eventsSearchForm->isValid()) {
-            // Récupérez les données du formulaire
             $formData = $eventsSearchForm->getData();
 
-            var_dump($formData);
+            dd($formData);
         }
 
         return $this->render('event/list.html.twig', [
