@@ -34,13 +34,13 @@
 			</div>
 		</div>
 		<h2 class="text-xl font-bold my-4">Liste des participants inscrits :</h2>
-		<div class="overflow-y-auto" style="height: 200px; max-width: 350px">
+		<div class="overflow-y-auto" style="height: 200px; max-width: 500px">
 			<table class="table-auto border-collapse md:table bg-white rounded shadow border border-gray-400">
 				<thead class="sticky rounded top-0 bg-gray-400">
 					<tr>
 						<th class="px-4 py-2 border border-gray-400">Pseudo</th>
 						<th class="px-4 py-2 border border-gray-400">Nom</th>
-						{# <th class="px-4 py-2 border border-gray-400">Lien profil</th> #}
+						<th class="px-4 py-2 border border-gray-400">Lien profil</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,9 +49,10 @@
 							<td class="px-4 py-2 border border-gray-400">{{ member.pseudo }}</td>
 							<td class="px-4 py-2 border border-gray-400">{{ member.name }}
 								{{ member.lastname }}</td>
-							{# <td class="px-4 py-2 border border-gray-400">
-															<a href="{{ path('user_show', {'id': member.id}) }}">Voir le profil</a>
-														</td> #}
+							<td class="px-4 py-2 border border-gray-400">
+								{# <a href="{{ path('profile_show', {'id': member.id}) }}">Voir le profil</a> #}
+								<a href="#">Voir le profil</a>
+							</td>
 						</tr>
 					{% endfor %}
 				</tbody>
