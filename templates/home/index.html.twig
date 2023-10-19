@@ -7,8 +7,12 @@
         <div class="flex mb-4 my-4">
             <div class="w-1/2 p-4 bg-white border rounded shadow">
 
+                {{ form_start(form, {'attr': {'action': path('app_home'), 'method': 'POST'}}) }}
                 {{ form_row(form.name) }}
                 <button type="submit">Chercher</button>
+                {{ form_errors(form) }}
+                {{ form_end(form) }}
+
 
             </div>
             <div class="w-1/2 p-4 bg-white border rounded shadow ml-4">
@@ -51,13 +55,11 @@
                         {% for event in events %}
                         <tr>
                             <td class="border px-4 py-2">{{ event.name }}</td>
-                            <td class="border px-4 py-2">{{ event.name }}</td>
-                            <td class="border px-4 py-2">{{ event.name }}</td>
-                            <td class="border px-4 py-2">{{ event.name }}</td>
-                            <td class="border px-4 py-2">{{ event.name }}</td>
-                            <td class="border px-4 py-2">{{ event.name }}</td>
-                            <td class="border px-4 py-2">{{ event.name }}</td>
-                            <td class="border px-4 py-2">{{ event.name }}</td>
+                            <td class="border px-4 py-2">{{ event.eventDate|date('Y-m-d') }}</td>
+                            <td class="border px-4 py-2">{{ event.closureDate|date('Y-m-d') }}</td>
+                            <td class="border px-4 py-2">{{ event.participants }} / {{ event.maxParticipants }}</td>
+                            <td class="border px-4 py-2">{{ event.state.name }}</td>
+                            <td class="border px-4 py-2">{{ event.organizer.name }}</td>
                         </tr>
                         {% endfor %}
 

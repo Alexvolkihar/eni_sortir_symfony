@@ -31,7 +31,7 @@ class HomeController extends AbstractController
             ]);
         }
 
-        return $this->render('home/index.html.twig', [
+        return $this->render('home/city.html.twig', [
             'controller_name' => 'HomeController',
             'form' => $form->createView(),
             'events' => $events,
