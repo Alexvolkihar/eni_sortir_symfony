@@ -26,8 +26,8 @@ class AppFixtures extends Fixture
         $this->addStates($manager);
         $this->addCities(10, $manager);
         $this->addPlaces(5, $manager);
-        $this->addUsers(20, $manager);
-        $this->addEvents(10, $manager);
+        $this->addUsers(50, $manager);
+        $this->addEvents(20, $manager);
     }
 
     public function addSites(ObjectManager $manager)
@@ -115,11 +115,11 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < $number; $i++) {
             $event = new Event();
             $event
-                ->setName($faker->words($faker->numberBetween(1, 10), true))
-                ->setStartDateTime($faker->dateTimeBetween(new \DateTime("now"), new \DateTime("+1 year")))
+                ->setName($faker->words($faker->numberBetween(1, 5), true))
+                ->setStartDateTime($faker->dateTimeBetween(new \DateTime("-2 month"), new \DateTime("+6 month")))
                 ->setDuration(new \DateTime($faker->time()))
                 ->setNbMaxSub($faker->numberBetween(2, 20))
-                ->setSubDateLimit($faker->dateTimeBetween(new \DateTime("now"), $event->getStartDateTime()))
+                ->setSubDateLimit($faker->dateTimeBetween(new \DateTime("-3 month"), $event->getStartDateTime()))
                 ->setEventInfo($faker->text())
                 ->setState($faker->randomElement($states))
                 ->setSite($faker->randomElement($sites))
