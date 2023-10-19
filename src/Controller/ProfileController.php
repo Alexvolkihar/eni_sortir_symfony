@@ -11,6 +11,7 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Utils\Uploader;
+use App\Entity\User;
 
 
 
@@ -64,6 +65,13 @@ class ProfileController extends AbstractController
         return $this->render('profile/edit.html.twig', [
             'controller_name' => 'ProfileController',
             'registrationForm' => $form->createView(),
+        ]);
+    }
+    #[Route(('/{id}'), name: 'show')]
+    public function show(User $user): Response
+    {
+        return $this->render('profile/show.html.twig', [
+            'user' => $user,
         ]);
     }
 }
