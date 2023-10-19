@@ -40,6 +40,7 @@
 					<tr>
 						<th class="px-4 py-2 border border-gray-400">Pseudo</th>
 						<th class="px-4 py-2 border border-gray-400">Nom</th>
+						{# <th class="px-4 py-2 border border-gray-400">Lien profil</th> #}
 					</tr>
 				</thead>
 				<tbody>
@@ -48,6 +49,9 @@
 							<td class="px-4 py-2 border border-gray-400">{{ member.pseudo }}</td>
 							<td class="px-4 py-2 border border-gray-400">{{ member.name }}
 								{{ member.lastname }}</td>
+							{# <td class="px-4 py-2 border border-gray-400">
+															<a href="{{ path('user_show', {'id': member.id}) }}">Voir le profil</a>
+														</td> #}
 						</tr>
 					{% endfor %}
 				</tbody>
