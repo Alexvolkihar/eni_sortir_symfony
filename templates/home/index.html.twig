@@ -3,18 +3,70 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="container mx-auto px-4 bg-amber-200">
+        <div class="flex mb-4 my-4">
+            <div class="w-1/2 p-4 bg-white border rounded shadow">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                {{ form_start(form, {'attr': {'action': path('app_home'), 'method': 'POST'}}) }}
+                {{ form_row(form.name) }}
+                <button type="submit">Chercher</button>
+                {{ form_errors(form) }}
+                {{ form_end(form) }}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/Wamp/www/sortir/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/Wamp/www/sortir/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+            </div>
+            <div class="w-1/2 p-4 bg-white border rounded shadow ml-4">
+                <!-- Contenu de la deuxième colonne -->
+                <p>Contenu de la deuxième colonne</p>
+            </div>
+        </div>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var tableContainer = document.getElementById("table-container");
+                var tableRows = document.querySelectorAll("#table-container tbody tr");
+
+                if (tableRows.length > 2) {
+                    tableContainer.classList.add("overflow-y-scroll", "max-h-96");
+                }
+            });
+        </script>
+
+        <div class="flex">
+            <div class="w-full p-4 bg-white border rounded shadow">
+                <div id="table-container" class="overflow-x-auto">
+                    <table class="min-w-full">
+
+                        <thead>
+                        <tr class="sticky top-0 w-full bg-gray-400">
+                            <th class="border px-4 py-2">Nom de la sortie</th>
+                            <th class="border px-4 py-2">Date de la sortie</th>
+                            <th class="border px-4 py-2">Clôture</th>
+                            <th class="border px-4 py-2">Inscrits/places</th>
+                            <th class="border px-4 py-2">Etat</th>
+                            <th class="border px-4 py-2">Inscrit</th>
+                            <th class="border px-4 py-2">Organisateur</th>
+                            <th class="border px-4 py-2">Action</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for event in events %}
+                        <tr>
+                            <td class="border px-4 py-2">{{ event.name }}</td>
+                            <td class="border px-4 py-2">{{ event.eventDate|date('Y-m-d') }}</td>
+                            <td class="border px-4 py-2">{{ event.closureDate|date('Y-m-d') }}</td>
+                            <td class="border px-4 py-2">{{ event.participants }} / {{ event.maxParticipants }}</td>
+                            <td class="border px-4 py-2">{{ event.state.name }}</td>
+                            <td class="border px-4 py-2">{{ event.organizer.name }}</td>
+                        </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
