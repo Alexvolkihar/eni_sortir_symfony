@@ -10,6 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Utils\Uploader;
+
 
 
 
@@ -24,7 +26,7 @@ class ProfileController extends AbstractController
         ]);
     }
     #[Route('/edit', name: 'edit')]
-    public function edit(Request $request, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator, EntityManagerInterface $entityManager, Uploader $uploader): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(RegistrationFormType::class, $user, [
@@ -35,16 +37,19 @@ class ProfileController extends AbstractController
         $form
             ->remove('agreeTerms')     // Exclut le champ agreeTerms
             ->remove('isAdmin')        // Exclut le champ isAdmin
-            ->remove('isActive')   ;    // Exclut le champ isActive
+            ->remove('isActive');    // Exclut le champ isActive
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Effectuez vos opérations de mise à jour ici
 
-            // Par exemple, si vous avez ajouté un nouveau champ
-            // $newFieldValue = $form->get('newField')->getData();
-            // $user->setNewField($newFieldValue);
+            // $user->setAvatar(
+            //     $uploader->upload(
+            //         $form->get('avatar')->getData(),
+            //         $this->getParameter('upload_avatar_dir'),
+            //         $user->getName()
+            //     )
+            // ); 
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -61,5 +66,4 @@ class ProfileController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
-    
 }
