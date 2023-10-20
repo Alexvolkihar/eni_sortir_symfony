@@ -7,6 +7,9 @@ use App\Entity\Event;
 use App\Entity\Place;
 use App\Entity\Site;
 use App\Entity\State;
+use App\Entity\User;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -33,6 +36,17 @@ class EventOutType extends AbstractType
             ->add('place',EntityType::class,[
                 'class' => Place::class,
                 'choice_label' => 'name'
+            ])
+            ->add('state',EntityType::class, [
+                'class'=> State::class,
+                'query_builder' => function (EntityRepository $er): QueryBuilder {
+                    return $er->createQueryBuilder('u');
+                },
+                'choice_label' => 'label',
+                'attr' => [
+                    'class' => 'hidden',
+                ],
+                'label' => false,
             ])
             ->add('site', EntityType::class,[
                 'class' => Site::class,

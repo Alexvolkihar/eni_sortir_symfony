@@ -4,18 +4,17 @@
 
 {% block body %}
 
-    <form method="post">
-        {{ form_start(eventCreateForm) }}
+    {{  form_start(eventCreateForm) }}
 
-            {{ form_row(eventCreateFormCity.postalCode) }}
-            {{ form_row(eventCreateFormCity.street) }}
-            {{ form_row(eventCreateFormCity.city) }}
+            {{ form_row(eventCreateForm.name) }}
+            {{ form_row(eventCreateForm.startDateTime) }}
+            {{ form_row(eventCreateForm.subDateLimit) }}
+            {{ form_row(eventCreateForm.nbMaxSub) }}
+            {{ form_row(eventCreateForm.duration) }}
+            {{ form_row(eventCreateForm.eventInfo) }}
+            {{ form_row(eventCreateForm.place) }}
+            {{ form_row(eventCreateForm.site) }}
         <button type="submit" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600"> Ajouté</button>
 
-
-        {{ form_end(eventCreateForm) }}
-
-
-
-        </form>
+    {{  form_end(eventCreateForm) }}
 {% endblock %}

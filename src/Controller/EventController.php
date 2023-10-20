@@ -56,15 +56,10 @@ class EventController extends AbstractController
         $event = new Event();
 
         $eventCreateForm = $this->createForm(EventOutType::class,$event);
-        $eventCreateFormCity = $this->createForm(EventOutCityType::class);
-
-
-        $state = new State();
-        $state->setLabel('Créée');
-        $event->setState($state);
-
+        $test =$this->getUser();
+        $event->setHost($test);
         $eventCreateForm->handleRequest($request);
-        $eventCreateFormCity->handleRequest($request);
+       // $eventCreateFormCity->handleRequest($request);
 
         if($eventCreateForm->isSubmitted()&& $eventCreateForm->isValid()){
 
@@ -74,7 +69,7 @@ class EventController extends AbstractController
 
         return $this->render('event/createEvent.html.twig', [
            'eventCreateForm' => $eventCreateForm->createView(),
-            'eventCreateFormCity' => $eventCreateFormCity->createView()
+            //'eventCreateFormCity' => $eventCreateFormCity->createView()
         ]);
     }
 
