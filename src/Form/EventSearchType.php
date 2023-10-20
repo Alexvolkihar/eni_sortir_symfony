@@ -22,7 +22,7 @@ class EventSearchType extends AbstractType
                 'class' => Site::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Choisissez un site',
-                'required' => false,
+                'required' => false
             ])
             ->add('name', TextType::class, [
                 'required' => false,
@@ -32,13 +32,13 @@ class EventSearchType extends AbstractType
                 'html5' => true,
                 'widget' => "single_text",
                 'required' => false,
-                'label' => 'Entre',
+                'label' => 'Entre'
             ])
             ->add('betweenLastDate', DateType::class, [
                 'html5' => true,
                 'widget' => "single_text",
                 'required' => false,
-                'label' => 'et',
+                'label' => 'et'
             ])
             ->add('isHost', CheckboxType::class, [
                 'label' => 'Sorties dont je suis l\'organisateur/trice',
