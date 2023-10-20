@@ -1,5 +1,5 @@
 <nav>
-    <div class="bg-gradient-to-b from-gray-700 to-gray-600 sm:block">
+	<div class="bg-gradient-to-b from-gray-700 to-gray-600 sm:block">
 
         <div class="text-white sm:ml-20 py-3 flex space-x-10 ">
 
@@ -18,12 +18,12 @@
                         {# <a href="{{ path('app_myprofile') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">profil</a> #}
                         <a href="{{ path('app_logout') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Se déconnecter</a>
 
-                    {% endif %}
-                {% else %}
-                    <a href="{{ path('app_login') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Se connecter</a>
-                {% endif %}
-               <!-- <a href="#" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600" aria-current="page">Dashboard</a> -->
-            </div>
-        </div>
-    </div>
+					{% endif %}
+				{% else %}
+					<a href="{{ path('app_login') }}" class="text-white rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Se connecter</a>
+				{% endif %}
+				<!-- <a href="#" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600" aria-current="page">Dashboard</a> -->
+			</div>
+		</div>
+	</div>
 </nav>
