@@ -52,11 +52,11 @@
 								<a href="{{ path('event_show', {'id': event.id}) }}">Afficher</a>
 								{% if date() < date(event.subDateLimit) and app.user != event.host and not event.members.contains(app.user) and event.members.count < event.nbMaxSub %}
 									-
-									<a href="#">S'inscrire</a>
+									<a href="{{path('event_sub', {'id': event.id})}}">S'inscrire</a>
 								{% endif %}
 								{% if app.user != event.host and event.members.contains(app.user) %}
 									-
-									<a href="#">Se désinscrire</a>
+									<a href="{{path('event_unsub', {'id': event.id})}}">Se désinscrire</a>
 								{% endif %}
 							</td>
 						</tr>
