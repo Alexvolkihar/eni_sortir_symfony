@@ -20,29 +20,32 @@ class EventController extends AbstractController
     ) {
     }
 
-
+    // ajoute une vérification si pas connecté redirige vers la page de connexion, si connecté redirige vers la page d'accuei
     #[Route(path: '/', name: 'events_index')]
     public function index(EntityManagerInterface $entityManager, Request $request, EventRepository $eventRepository, UserRepository $userRepository): Response
     {
-        $eventSearch = new Event();
-        $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        if ($this->security->getUser()) {
+            $eventSearch = new Event();
+            $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
 
-        $eventSearch->setSite($user->getSite());
-        $eventsSearchForm = $this->createForm(EventSearchType::class, $eventSearch);
-        $events = $eventRepository->findAll();
+            $eventSearch->setSite($user->getSite());
+            $eventsSearchForm = $this->createForm(EventSearchType::class, $eventSearch);
+            $events = $eventRepository->findAll();
 
-        $eventsSearchForm->handleRequest($request);
+            $eventsSearchForm->handleRequest($request);
 
-        if ($eventsSearchForm->isSubmitted() && $eventsSearchForm->isValid()) {
-            $formData = $eventsSearchForm->getData();
+            if ($eventsSearchForm->isSubmitted() && $eventsSearchForm->isValid()) {
+                $formData = $eventsSearchForm->getData();
 
-            dd($formData);
+                dd($formData);
+            }
+
+            return $this->render('event/list.html.twig', [
+                'eventsSearchForm' => $eventsSearchForm->createView(),
+                'events' => $events,
+            ]);
         }
-
-        return $this->render('event/list.html.twig', [
-            'eventsSearchForm' => $eventsSearchForm->createView(),
-            'events' => $events,
-        ]);
+        return $this->redirectToRoute('app_login');
     }
     #[Route(path: '/event/{id}', name: 'event_show')]
     public function show(Event $event): Response
