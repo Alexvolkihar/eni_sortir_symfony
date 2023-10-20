@@ -8,6 +8,7 @@ use App\Entity\Place;
 use App\Entity\State;
 use App\Form\EventOutCityType;
 use App\Form\EventOutType;
+use App\Data\SearchEvent;
 use App\Form\EventSearchType;
 use App\Repository\EventRepository;
 use App\Repository\StateRepository;
@@ -31,19 +32,17 @@ class EventController extends AbstractController
     #[Route(path: '/', name: 'events_index')]
     public function index(EntityManagerInterface $entityManager, Request $request, EventRepository $eventRepository, UserRepository $userRepository): Response
     {
-        $eventSearch = new Event();
+        $searchEvent = new SearchEvent();
         $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        $searchEvent->site = $user->getSite();
+        $searchEvent->user = $user;
 
-        $eventSearch->setSite($user->getSite());
-        $eventsSearchForm = $this->createForm(EventSearchType::class, $eventSearch);
-        $events = $eventRepository->findAll();
+        $eventsSearchForm = $this->createForm(EventSearchType::class, $searchEvent);
+        $events = $eventRepository->searchFind($searchEvent);
 
         $eventsSearchForm->handleRequest($request);
-
         if ($eventsSearchForm->isSubmitted() && $eventsSearchForm->isValid()) {
-            $formData = $eventsSearchForm->getData();
-
-            dd($formData);
+            $events = $eventRepository->searchFind($searchEvent);
         }
 
         return $this->render('event/list.html.twig', [

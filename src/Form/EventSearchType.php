@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\Event;
 use App\Entity\Site;
+use App\Data\SearchEvent;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -33,41 +33,42 @@ class EventSearchType extends AbstractType
                 'widget' => "single_text",
                 'required' => false,
                 'label' => 'Entre',
-                'mapped' => false
             ])
             ->add('betweenLastDate', DateType::class, [
                 'html5' => true,
                 'widget' => "single_text",
                 'required' => false,
                 'label' => 'et',
-                'mapped' => false
             ])
             ->add('isHost', CheckboxType::class, [
                 'label' => 'Sorties dont je suis l\'organisateur/trice',
-                'required' => false,
-                'mapped' => false
+                'required' => false
             ])
             ->add('isMember', CheckboxType::class, [
                 'label' => 'Sorties auxquelles je suis inscrit/e',
-                'required' => false,
-                'mapped' => false
+                'required' => false
             ])
             ->add('notMember', CheckboxType::class, [
                 'label' => 'Sorties auxquelles je ne suis pas inscrit/e',
-                'required' => false,
-                'mapped' => false
+                'required' => false
             ])
             ->add('passed', CheckboxType::class, [
                 'label' => 'Sorties passées',
-                'required' => false,
-                'mapped' => false
+                'required' => false
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Event::class,
+            'data_class' => SearchEvent::class,
+            'method' => 'GET',
+            'csrf_protection' => false
         ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }
