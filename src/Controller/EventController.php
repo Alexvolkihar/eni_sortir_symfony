@@ -54,4 +54,24 @@ class EventController extends AbstractController
             'event' => $event,
         ]);
     }
+    #[Route(path: 'event/sub/{id}', name: 'event_sub')]
+    public function eventSub(Event $event, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->security->getUser();
+        $event->addMember($user);
+        $entityManager->persist($event);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('events_index');
+    }
+    #[Route(path: 'event/unsub/{id}', name: 'event_unsub')]
+    public function eventUnsub(Event $event, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->security->getUser();
+        $event->removeMember($user);
+        $entityManager->persist($event);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('events_index');
+    }
 }

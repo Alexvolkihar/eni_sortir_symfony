@@ -3,7 +3,7 @@
 
         <div class="text-white sm:ml-20 py-3 flex space-x-10 ">
 
-            <a href="#">
+            <a href="{{path('events_index')}}">
                 <div class="px-3 py-2  ">
                     <h1>Sortir</h1>
                 </div>
@@ -15,7 +15,7 @@
                         <li><a href="{{ path('app_site') }}">Site</a></li>
                     {% else %}
                         <a href="{{ path('events_index') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Accueil</a>
-                        {# <a href="{{ path('app_myprofile') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">profil</a> #}
+                        <a href="{{ path('profile_index') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">profil</a>
                         <a href="{{ path('app_logout') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Se déconnecter</a>
 
 					{% endif %}
