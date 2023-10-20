@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gérer les Villes{% endblock %}
+{% block title %}Créer un événement
+{% endblock %}
 
 {% block body %}
-
-    {{  form_start(eventCreateForm) }}
-
-            {{ form_row(eventCreateForm.name) }}
-            {{ form_row(eventCreateForm.startDateTime) }}
-            {{ form_row(eventCreateForm.subDateLimit) }}
-            {{ form_row(eventCreateForm.nbMaxSub) }}
-            {{ form_row(eventCreateForm.duration) }}
-            {{ form_row(eventCreateForm.eventInfo) }}
-            {{ form_row(eventCreateForm.place) }}
-            {{ form_row(eventCreateForm.site) }}
-        <button type="submit" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600"> Ajouté</button>
-
-    {{  form_end(eventCreateForm) }}
+	<div class="flex justify-center items-center h-screen">
+		<div class="w-full max-w-md">
+			<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+				<h1 class="text-2xl font-bold mb-4 text-center">Créer une sortie</h1>
+				{{ form_start(eventCreateForm) }}
+				<div class="mb-4">
+					{{ form_row(eventCreateForm.name, {'attr': {'class': 'fshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Nom de l\'événement'}}) }}
+                    </div>
+                    <div class="mb-4">
+                        {{ form_row(eventCreateForm.startDateTime, {'attr': {'class': 'shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Date et heure de début'}}) }}
+                    </div>
+                    <div class="mb-4">
+                        {{ form_row(eventCreateForm.subDateLimit, {'attr': {'class': 'shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Date limite d\'inscription'}}) }}
+				</div>
+				<div class="mb-4">
+					{{ form_row(eventCreateForm.nbMaxSub, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Nombre maximum de participants'}}) }}
+				</div>
+				<div class="mb-4">
+					{{ form_row(eventCreateForm.duration, {'attr': {'class': 'shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Durée de l\'événement'}}) }}
+                    </div>
+                    <div class="mb-4">
+                        {{ form_row(eventCreateForm.eventInfo, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Description et informations'}}) }}
+                    </div>
+                    <div class="mb-4">
+                        {{ form_row(eventCreateForm.place, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Lieu de l\'événement'}}) }}
+				</div>
+				<div class="mb-4">
+					{{ form_row(eventCreateForm.site, {'attr': {'class': 'form-select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Site organisateur'}}) }}
+				</div>
+				<button type="submit" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600">Créer l'événement</button>
+				{{ form_end(eventCreateForm) }}
+			</div>
+		</div>
+	</div>
 {% endblock %}
