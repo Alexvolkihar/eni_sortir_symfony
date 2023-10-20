@@ -1,26 +1,22 @@
 <nav>
 	<div class="bg-gradient-to-b from-gray-700 to-gray-600 sm:block">
 
-		<div class=" sm:ml-20 py-3 flex space-x-10 ">
+        <div class="text-white sm:ml-20 py-3 flex space-x-10 ">
 
-			<a href="#">
-				<div class="px-3 py-2  text-white">
-					<h1>Sortir</h1>
-				</div>
-			</a>
-			<div class=" px-6 py-2 absolute right-3">
-				{% if app.user %}
-					{% if is_granted("ROLE_ADMIN") %}
-						<li>
-							<a href="{{ path('app_ville') }}">Ville</a>
-						</li>
-						<li>
-							<a href="{{ path('app_site') }}">Site</a>
-						</li>
-					{% else %}
-						<a href="{{ path('app_home') }}" class="text-white rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Accueil</a>
-						<a href="{{ path('profile_index') }}" class="text-white rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Profil</a>
-						<a href="{{ path('app_logout') }}" class="text-white rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Se déconnecter</a>
+            <a href="#">
+                <div class="px-3 py-2  ">
+                    <h1>Sortir</h1>
+                </div>
+            </a>
+            <div class=" px-6 py-2 absolute right-3">
+                {% if app.user %}
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li><a href="{{ path('app_ville') }}">Ville</a></li>
+                        <li><a href="{{ path('app_site') }}">Site</a></li>
+                    {% else %}
+                        <a href="{{ path('events_index') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Accueil</a>
+                        {# <a href="{{ path('app_myprofile') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">profil</a> #}
+                        <a href="{{ path('app_logout') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Se déconnecter</a>
 
 					{% endif %}
 				{% else %}

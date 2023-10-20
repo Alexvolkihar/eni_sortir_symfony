@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<h1 class="md:text-right text-xl">
+		<span class="hidden md:inline">
+			Date du jour :
+			{{"now"|date('d/m/Y')}}<br/>
+			Participant :
+			{{app.user.name}}
+			{{app.user.lastname}}
+		</span>
+		<span class="md:hidden">Mes sorties<span></h1>
+			<section class="break-words hidden md:flex mb-4 w-full p-4 bg-white border rounded shadow">
+				{{ form_start(eventsSearchForm) }}
+				{{ form_widget(eventsSearchForm) }}
+				<button type="submit">Chercher</button>
+				{{ form_end(eventsSearchForm) }}
+
+			</div>
+		</section>
+		<section>
+			<table class="hidden md:table m-auto bg-white rounded shadow">
+				<thead class="table w-full table-fixed sticky rounded top-0 bg-gray-400">
+					<th class="border px-4 py-2">Nom de la sortie</th>
+					<th class="border px-4 py-2">Date de la sortie</th>
+					<th class="border px-4 py-2 ">Clôture</th>
+					<th class="border px-4 py-2 ">Inscrits/places</th>
+					<th class="border px-4 py-2 ">Etat</th>
+					<th class="border px-4 py-2 ">Inscrit</th>
+					<th class="border px-4 py-2 ">Organisateur</th>
+					<th class="border px-4 py-2 ">Action</th>
+				</thead>
+
+				<tbody class="h-[28rem] block overflow-hidden  hover:overflow-y-auto">
+					{% for event in events %}
+						<tr class="table w-full table-fixed">
+							<td class="border px-4 py-2">
+								<a href="#">{{ event.name }}</a>
+							</td>
+							<td class="border px-4 py-2">{{ event.startDateTime | date('d/m/Y H\\Hm') }}</td>
+							<td class="border px-4 py-2 ">{{ event.subDateLimit  | date('d/m/Y') }}</td>
+							<td class="border px-4 py-2 ">{{ event.members.count}}/{{event.nbMaxSub}}</td>
+							<td class="border px-4 py-2 ">{{ event.state.label }}</td>
+							<td class="border px-4 py-2 text-center ">
+								{% if event.members.contains(app.user) %}X
+								{% endif %}
+							</td>
+							<td class="border px-4 py-2 ">
+								<a href="#">{{ event.host.name }}
+									{{ event.host.lastname }}</a>
+							</td>
+							<td class="border px-4 py-2 ">
+								<a href="{{ path('event_show', {'id': event.id}) }}">Afficher</a>
+								{% if date() < date(event.subDateLimit) and app.user != event.host and not event.members.contains(app.user) and event.members.count < event.nbMaxSub %}
+									-
+									<a href="#">S'inscrire</a>
+								{% endif %}
+								{% if app.user != event.host and event.members.contains(app.user) %}
+									-
+									<a href="#">Se désinscrire</a>
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<table class=" md:hidden m-auto bg-white rounded shadow">
+				<thead class="table w-full table-fixed sticky rounded top-0 bg-gray-400">
+					<th class="border px-4 py-2">Nom de la sortie</th>
+					<th class="border px-4 py-2">Date de la sortie</th>
+					<th class="border px-4 py-2">Lieu</th>
+				</thead>
+
+				<tbody class="h-[28rem] block overflow-hidden  hover:overflow-y-auto">
+					{% for event in events %}
+						{% if event.members.contains(app.user) %}
+							<tr class="table w-full table-fixed">
+								<td class="border px-4 py-2">
+									<a href="#">{{ event.name }}</a>
+								</td>
+								<td class="border px-4 py-2">{{ event.startDateTime | date('d/m/Y H\\Hm') }}</td>
+								<td class="border px-4 py-2 ">{{ event.place.city.name }}</td>
+							</tr>
+						{% endif %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</section>
+	{% endblock %}

@@ -15,18 +15,18 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<header>
-
-		{% include 'menu/nav.html.twig' %}
-	</header>
-	<main>
-		{% for message in app.flashes('success') %}
-			<div class="flash flash-success">
-				{{ message }}
-			</div>
-		{% endfor %}
-		{% block body %}{% endblock %}
-	</main>
-
+	<body class="h-screen">
+		<header>
+			{% include 'menu/nav.html.twig' %}
+		</header>
+		<main class="m-auto container">
+			{% for message in app.flashes('success') %}
+				<div class="flash flash-success">
+					{{ message }}
+				</div>
+			{% endfor %}
+			{% block body %}{% endblock %}
+		</main>
+	</body>
 </html>
 <!--Cc -->
