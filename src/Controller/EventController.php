@@ -5,13 +5,10 @@ namespace App\Controller;
 use App\Entity\City;
 use App\Entity\Event;
 use App\Entity\Place;
-use App\Entity\State;
-use App\Form\EventOutCityType;
 use App\Form\EventOutType;
 use App\Data\SearchEvent;
 use App\Form\EventSearchType;
 use App\Repository\EventRepository;
-use App\Repository\StateRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -55,20 +52,20 @@ class EventController extends AbstractController
     {
         $event = new Event();
 
-        $eventCreateForm = $this->createForm(EventOutType::class,$event);
-        $test =$this->getUser();
+        $eventCreateForm = $this->createForm(EventOutType::class, $event);
+        $test = $this->getUser();
         $event->setHost($test);
         $eventCreateForm->handleRequest($request);
-       // $eventCreateFormCity->handleRequest($request);
+        // $eventCreateFormCity->handleRequest($request);
 
-        if($eventCreateForm->isSubmitted()&& $eventCreateForm->isValid()){
+        if ($eventCreateForm->isSubmitted() && $eventCreateForm->isValid()) {
 
             $entityManager->persist($event);
             $entityManager->flush();
         }
 
         return $this->render('event/createEvent.html.twig', [
-           'eventCreateForm' => $eventCreateForm->createView(),
+            'eventCreateForm' => $eventCreateForm->createView(),
             //'eventCreateFormCity' => $eventCreateFormCity->createView()
         ]);
     }
@@ -79,15 +76,14 @@ class EventController extends AbstractController
         $repository = $entityManager->getRepository(City::class);
         $repositoryStreet = $entityManager->getRepository(Place::class);
         $city = $repository->find($cityId);
-        $street = $repositoryStreet->findOneBy(['city'=>$cityId]);
+        $street = $repositoryStreet->findOneBy(['city' => $cityId]);
 
-        if(!$city | !$street){
-            return new JsonResponse(['postalCode' => '','street' => '']);
+        if (!$city | !$street) {
+            return new JsonResponse(['postalCode' => '', 'street' => '']);
         }
         $postalCode = $city->getPostalCode();
         $streets = $street->getName();
 
-        return new JsonResponse(['postalCode' => $postalCode,'street' => $streets]);
+        return new JsonResponse(['postalCode' => $postalCode, 'street' => $streets]);
     }
-
 }
