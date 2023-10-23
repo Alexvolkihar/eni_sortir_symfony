@@ -1,29 +1,18 @@
-<nav>
-	<div class="bg-gradient-to-b from-gray-700 to-gray-600 sm:block">
+<nav class="bg-gradient-to-b from-gray-700 to-gray-600 px-10 md:px-20 lg:px-40 text-indigo-200 py-3 flex justify-between align-middle border-b-4 border-b-indigo-200">
+    <a href="{{path('events_index')}}" class="block text-xl">Sortir</a>
+    <ul class="hidden md:flex justify-between">
+        {% if app.user %}
+            {% if is_granted("ROLE_ADMIN") %}
+                <li><a href="{{ path('app_ville') }}" class="px-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Ville</a></li>
+                <li><a href="{{ path('app_site') }}" class="px-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Site</a></li>
+            {% else %}
+                <li><a href="{{ path('events_index') }}" class="px-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Accueil</a></li>
+                <li><a href="{{ path('profile_index') }}" class="px-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Profil</a></li>
+                <li><a href="{{ path('app_logout') }}" class="pl-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Se déconnecter</a></li>
 
-        <div class="text-white sm:ml-20 py-3 flex space-x-10 ">
-
-            <a href="{{path('events_index')}}">
-                <div class="px-3 py-2  ">
-                    <h1>Sortir</h1>
-                </div>
-            </a>
-            <div class=" px-6 py-2 absolute right-3">
-                {% if app.user %}
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <li><a href="{{ path('app_ville') }}">Ville</a></li>
-                        <li><a href="{{ path('app_site') }}">Site</a></li>
-                    {% else %}
-                        <a href="{{ path('events_index') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Accueil</a>
-                        <a href="{{ path('profile_index') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">profil</a>
-                        <a href="{{ path('app_logout') }}" class="rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Se déconnecter</a>
-
-					{% endif %}
-				{% else %}
-					<a href="{{ path('app_login') }}" class="text-white rounded-md px-4 py-3 text-sm font-medium hover:underline underline-offset-4 decoration-2 decoration-gray-500">Se connecter</a>
-				{% endif %}
-				<!-- <a href="#" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600" aria-current="page">Dashboard</a> -->
-			</div>
-		</div>
-	</div>
+            {% endif %}
+        {% else %}
+            <li><a href="{{ path('app_login') }}" class="text-white pl-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Se connecter</a></li>
+        {% endif %}
+    </ul>
 </nav>
