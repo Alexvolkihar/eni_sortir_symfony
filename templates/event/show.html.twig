@@ -56,6 +56,9 @@
 					{% endfor %}
 				</tbody>
 			</table>
+			{% if app.user == event.host %}
+				-<a href="{{path('event_annuler', {'id': event.id})}}">Annulée</a>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}
