@@ -33,20 +33,22 @@
         <button type="submit" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-5 py-2 text-md font-medium my-auto hover:bg-gray-600">Chercher</button>
         {{ form_end(eventsSearchForm) }}
 
-    </div>
-</section>
-<section>
-    <table class="hidden md:table m-auto bg-white rounded shadow">
-        <thead class="table w-full table-fixed sticky rounded top-0 bg-gray-400">
-            <th class="border px-4 py-2">Nom de la sortie</th>
-            <th class="border px-4 py-2">Date de la sortie</th>
-            <th class="border px-4 py-2 ">Clôture</th>
-            <th class="border px-4 py-2 ">Inscrits/places</th>
-            <th class="border px-4 py-2 ">Etat</th>
-            <th class="border px-4 py-2 ">Inscrit</th>
-            <th class="border px-4 py-2 ">Organisateur</th>
-            <th class="border px-4 py-2 ">Action</th>
-        </thead>
+
+
+			</div>
+		</section>
+		<section>
+			<table class="hidden md:table m-auto bg-white rounded shadow">
+				<thead class="table w-full table-fixed sticky rounded top-0 bg-gray-400">
+					<th class="border px-4 py-2">Nom de la sortie</th>
+					<th class="border px-4 py-2">Date de la sortie</th>
+					<th class="border px-4 py-2 ">Clôture</th>
+					<th class="border px-4 py-2 ">Inscrits/places</th>
+					<th class="border px-4 py-2 ">Etat</th>
+					<th class="border px-4 py-2 ">Inscrit</th>
+					<th class="border px-4 py-2 ">Organisateur</th>
+					<th class="border px-4 py-2 ">Action</th>
+				</thead>
 
         <tbody class="max-h-[32rem] block overflow-hidden  hover:overflow-y-auto">
         {% for event in events %}

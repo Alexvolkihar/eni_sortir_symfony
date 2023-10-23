@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="flex justify-center items-center h-screen">
+		<div class="w-full max-w-4xl flex">
+			<div class="w-1/3 flex justify-center items-center">
+				<img src="../../assets/img/sortirImg.png" alt="Dummy image" class="w-full rounded">
+			</div>
+			<div class="w-2/3 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto">
+				<h1 class="text-center mb-6">
+				<div class="text-center mb-6">
+					<p class="text-lg font-bold">Profil de {{user.pseudo}}</p>
+				</div>
+				<div class="mb-4">
+					<p class="font-bold">Email:</p>
+					<p>{{ user.email }}</p>
+				</div>
+				<div class="mb-4">
+					<p class="font-bold">Name:</p>
+					<p>{{ user.name }}</p>
+				</div>
+				<div class="mb-4">
+					<p class="font-bold">Lastname:</p>
+					<p>{{ user.lastname }}</p>
+				</div>
+				<div class="mb-4">
+					<p class="font-bold">Phone number:</p>
+					{# <p>{{ user.phone }}</p> #}
+                    <p>**********</p>
+				</div>
+				<div class="mb-4">
+					<p class="font-bold">Pseudo:</p>
+					<p>{{ user.pseudo }}</p>
+				</div>
+				{#<div class="mb-4">
+				                <p class="font-bold">Site:</p>
+				                <p>{{ app.user.site }}</p>
+				            </div>#}
+				<div class="flex items-center justify-between text-white font-bold">
+
+					<button class="bg-red-500 hover:bg-red-700 py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+						<a href="{{ path('events_index') }}">retour</a>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
