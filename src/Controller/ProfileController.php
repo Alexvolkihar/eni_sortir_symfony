@@ -12,18 +12,17 @@ use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Utils\Uploader;
 use App\Entity\User;
-
-
-
+use App\Repository\UserRepository;
 
 #[Route('/profile', name: 'profile_')]
 class ProfileController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(): Response
+    public function index(UserRepository $userRepository): Response
     {
-        return $this->render('profile/index.html.twig', [
-            'controller_name' => 'ProfileController',
+        $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        return $this->render('profile/show.html.twig', [
+            'user' => $user,
         ]);
     }
     #[Route('/edit', name: 'edit')]
@@ -50,7 +49,7 @@ class ProfileController extends AbstractController
             //         $this->getParameter('upload_avatar_dir'),
             //         $user->getName()
             //     )
-            // ); 
+            // );
 
             $entityManager->persist($user);
             $entityManager->flush();
