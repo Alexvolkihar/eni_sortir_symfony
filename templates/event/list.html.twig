@@ -8,14 +8,14 @@
     <span class="md:hidden">Mes sorties<span>
 </h1>
 <section class="break-words hidden md:flex mb-4 w-full p-4 bg-white border border-indigo-200 rounded shadow">
-    {{ form_start(eventsSearchForm, {'attr': {'class' :' w-full flex flex-col lg:flex-row align-middle'}}) }}
+    {{ form_start(eventsSearchForm, {'attr': {'class' :' w-full flex flex-col lg:flex-row items-center'}}) }}
         <div class="w-full lg:w-2/5 pr-4">
-            <div class="w-full flex align-middle justify-between mb-2">
+            <div class="w-full flex items-center justify-between mb-2">
                 {{ form_label(eventsSearchForm.site, null) }}
                 {{ form_widget(eventsSearchForm.site,{'attr': {'class': 'inline-block ml-8 px-2 py-1 bg-white border rounded-md'}}) }}
             </div>
 
-            <div class="w-full flex align-middle justify-between mb-2">
+            <div class="w-full flex items-center justify-between mb-2">
                 {{ form_label(eventsSearchForm.name, null) }}
                 {{ form_widget(eventsSearchForm.name,{'attr': {'class': 'inline-block px-2 py-1 bg-white border rounded-md'}}) }}
             </div>
