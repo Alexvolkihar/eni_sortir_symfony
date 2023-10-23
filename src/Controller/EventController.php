@@ -35,6 +35,7 @@ class EventController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
+        
         $searchEvent = new SearchEvent();
         $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
         $searchEvent->site = $user->getSite();
