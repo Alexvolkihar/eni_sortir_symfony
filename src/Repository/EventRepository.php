@@ -66,7 +66,7 @@ class EventRepository extends ServiceEntityRepository
         if (!empty($search->name)) {
             $qb = $qb
                 ->andWhere('e.name LIKE :name')
-                ->setParameter('name', $search->name);
+                ->setParameter('name', "%{$search->name}%");
         }
 
         if (empty($search->betweenFirstDate)) {
