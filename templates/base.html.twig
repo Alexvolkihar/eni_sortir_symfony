@@ -19,7 +19,7 @@
 		<header>
 			{% include 'menu/nav.html.twig' %}
 		</header>
-		<main class="m-auto container">
+		<main class="px-10 md:px-20 lg:px-40">
 			{% for message in app.flashes('success') %}
 				<div class="flash flash-success">
 					{{ message }}
