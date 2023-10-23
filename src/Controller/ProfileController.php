@@ -50,7 +50,7 @@ class ProfileController extends AbstractController
             //         $this->getParameter('upload_avatar_dir'),
             //         $user->getName()
             //     )
-            // ); 
+            // );
 
             $entityManager->persist($user);
             $entityManager->flush();
