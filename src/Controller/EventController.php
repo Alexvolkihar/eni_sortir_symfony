@@ -125,5 +125,27 @@ class EventController extends AbstractController
 
         return new JsonResponse(['postalCode' => $postalCode,'street' => $streets]);
     }
+    #[Route(path: 'event/annuler/{id}', name: 'event_annuler')]
+    public function eventAnnuler($id,Event $event, EntityManagerInterface $entityManager): Response
+    {
+        $newState = $entityManager->getRepository(State::class)->find(12);
+
+        if (!$newState) {
+            throw $this->createNotFoundException('État non trouvé avec l\'ID 12');
+        }
+        if(!$entityManager->getRepository(State::class)->find(10)){
+            $event->setState($newState);
+
+            $entityManager->persist($event);
+            $entityManager->flush();
+
+
+            return $this->redirectToRoute('events_index');
+        }else{
+            $this->addFlash("error",'Impossible de changer le status si levent a commencé mec');
+
+        }
+        return $this->redirectToRoute('event_show', ['id' => $id]);
+    }
 
 }
