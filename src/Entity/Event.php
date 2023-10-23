@@ -34,7 +34,7 @@ class Event
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $eventInfo = null;
 
-    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Place $place = null;
 

@@ -3,6 +3,7 @@
 
 .env.local
 .idea/
+package-lock.json
 ### Composer ###
 composer.phar
 /vendor/
