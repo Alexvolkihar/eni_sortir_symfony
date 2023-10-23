@@ -80,12 +80,11 @@
 
         <tbody class="h-[28rem] block overflow-hidden  hover:overflow-y-auto">
         {% for event in events %}
-            {% if event.members.contains(app.user) %}
                 <tr class="table w-full table-fixed">
                     <td class="border px-4 py-2"><a href="#">{{ event.name }}</a></td>
-                    <td class="border px-4 py-2">{{ event.startDateTime | date('d/m/Y H\\Hm') }}</td>                    <td class="border px-4 py-2 ">{{ event.place.city.name }}</td>
+                    <td class="border px-4 py-2">{{ event.startDateTime | date('d/m/Y H\\Hm') }}</td>
+                    <td class="border px-4 py-2 ">{{ event.place.city.name }}</td>
                 </tr>
-            {% endif %}
         {% endfor %}
         </tbody>
     </table>

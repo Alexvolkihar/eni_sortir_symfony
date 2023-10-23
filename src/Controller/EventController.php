@@ -47,6 +47,7 @@ class EventController extends AbstractController
             'events' => $events,
         ]);
     }
+
     #[Route(path: '/createEvent', name: 'events_create')]
     public function createEvent(Request $request, EntityManagerInterface $entityManager): Response
     {
