@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container mx-auto text-justify">
+		<h1 class="text-2xl font-bold mb-4 text-center">Afficher une sortie</h1>
+		<div class="grid grid-cols-2 gap-4">
+			<div>
+				<p class="font-bold">Nom de la sortie :</p>
+				<p>{{event.name}}</p>
+				<p class="font-bold">Date et heure de la sortie :</p>
+				<p>{{ event.startDateTime|date("d:M:Y") }}</p>
+				<p class="font-bold">Date limite d'inscription :</p>
+				<p>{{ event.subDateLimit|date("d:M:Y")}}</p>
+				<p class="font-bold">Nombre de places :</p>
+				<p>{{ event.nbMaxSub }}</p>
+				<p class="font-bold">Durée :</p>
+				<p>{{ event.duration|date("m:h") }}</p>
+				<p class="font-bold">Description et infos :</p>
+				<p>{{ event.eventInfo }}</p>
+			</div>
+			<div>
+				<p class="font-bold">Ville organisatrice :</p>
+				<p>{{ event.site.name }}</p>
+				<p class="font-bold">Lieu :</p>
+				<p>{{ event.place.city.name }}</p>
+				<p class="font-bold">Rue :</p>
+				<p>{{ event.place.street }}</p>
+				<p class="font-bold">Code postal :</p>
+				<p>{{ event.place.city.postalCode }}</p>
+				<p class="font-bold">Latitude :</p>
+				<p>{{ event.place.latitude }}</p>
+				<p class="font-bold">Longitude :</p>
+				<p>{{ event.place.longitude }}</p>
+			</div>
+		</div>
+		<h2 class="text-xl font-bold my-4">Liste des participants inscrits :</h2>
+		<div class="overflow-y-auto" style="height: 12.5rem; max-width: 29.375rem">
+			<table class="table-auto border-collapse md:table bg-white rounded shadow border border-gray-400">
+				<thead class="sticky rounded top-0 bg-gray-400">
+					<tr>
+						<th class="px-4 py-2 border border-gray-400">Pseudo</th>
+						<th class="px-4 py-2 border border-gray-400">Nom</th>
+						<th class="px-4 py-2 border border-gray-400">Lien profil</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for member in event.members %}
+						<tr>
+							<td class="px-4 py-2 border border-gray-400">{{ member.pseudo }}</td>
+							<td class="px-4 py-2 border border-gray-400">{{ member.name }}
+								{{ member.lastname }}</td>
+							<td class="px-4 py-2 border border-gray-400">
+								<a href="{{ path('profile_show', {'id': member.id}) }}">Voir le profil</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}
