@@ -32,6 +32,9 @@ class EventController extends AbstractController
     #[Route(path: '/', name: 'events_index')]
     public function index(EntityManagerInterface $entityManager, Request $request, EventRepository $eventRepository, UserRepository $userRepository): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
         $searchEvent = new SearchEvent();
         $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
         $searchEvent->site = $user->getSite();
@@ -49,7 +52,7 @@ class EventController extends AbstractController
                 'eventsSearchForm' => $eventsSearchForm->createView(),
                 'events' => $events,
             ]);
-        }
+        
     }
     
     #[Route(path: '/event/{id}', name: 'event_show')]
@@ -62,6 +65,7 @@ class EventController extends AbstractController
     #[Route(path: 'event/sub/{id}', name: 'event_sub')]
     public function eventSub(Event $event, EntityManagerInterface $entityManager): Response
     {
+        
         $user = $this->security->getUser();
         $event->addMember($user);
         $entityManager->persist($event);
@@ -82,6 +86,7 @@ class EventController extends AbstractController
     #[Route(path: '/createEvent', name: 'events_create')]
     public function createEvent(Request $request, EntityManagerInterface $entityManager): Response
     {
+        
         $event = new Event();
 
         $eventCreateForm = $this->createForm(EventOutType::class,$event);
@@ -94,41 +99,13 @@ class EventController extends AbstractController
 
             $entityManager->persist($event);
             $entityManager->flush();
+            return $this->redirectToRoute('events_index');
         }
 
-            return $this->render('event/list.html.twig', [
-                'eventsSearchForm' => $eventsSearchForm->createView(),
-                'events' => $events,
-            ]);
-        }
-        return $this->redirectToRoute('app_login');
-    }
-    #[Route(path: '/event/{id}', name: 'event_show')]
-    public function show(Event $event): Response
-    {
-        return $this->render('event/show.html.twig', [
-            'event' => $event,
+        return $this->render('event/createEvent.html.twig', [
+           'eventCreateForm' => $eventCreateForm->createView(),
+            //'eventCreateFormCity' => $eventCreateFormCity->createView()
         ]);
-    }
-    #[Route(path: 'event/sub/{id}', name: 'event_sub')]
-    public function eventSub(Event $event, EntityManagerInterface $entityManager): Response
-    {
-        $user = $this->security->getUser();
-        $event->addMember($user);
-        $entityManager->persist($event);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('events_index');
-    }
-    #[Route(path: 'event/unsub/{id}', name: 'event_unsub')]
-    public function eventUnsub(Event $event, EntityManagerInterface $entityManager): Response
-    {
-        $user = $this->security->getUser();
-        $event->removeMember($user);
-        $entityManager->persist($event);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('events_index');
     }
 
     #[Route(path: '/getPostalCode/{cityId}', name: 'get_postal_code', methods: ['GET'])]

@@ -45,7 +45,7 @@
 								{% endif %}
 							</td>
 							<td class="border px-4 py-2 ">
-								<a href="#">{{ event.host.name }}
+								<a href="{{ path('profile_show', {'id': event.host.id}) }}">{{ event.host.name }}
 									{{ event.host.lastname }}</a>
 							</td>
 							<td class="border px-4 py-2 ">
