@@ -101,10 +101,11 @@
 
         {{ form_end(registrationForm) }}
     </form>
-</div>
-    <form method="post" enctype="multipart/form-data" action="{{ path('app_register') }}">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post" enctype="multipart/form-data" action="{{ path('app_register') }}">
         <input type="file" name="csv_file">
         <!-- Autres champs de formulaire pour l'inscription -->
         <button type="submit">Inscription à partir du fichier CSV</button>
     </form>
+</div>
+
 {% endblock %}
