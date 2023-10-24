@@ -32,7 +32,7 @@ class EventController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
-        
+
         $searchEvent = new SearchEvent();
         $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
         $searchEvent->site = $user->getSite();
@@ -46,13 +46,12 @@ class EventController extends AbstractController
             $events = $eventRepository->searchFind($searchEvent);
         }
 
-            return $this->render('event/list.html.twig', [
-                'eventsSearchForm' => $eventsSearchForm->createView(),
-                'events' => $events,
-            ]);
-        
+        return $this->render('event/list.html.twig', [
+            'eventsSearchForm' => $eventsSearchForm->createView(),
+            'events' => $events,
+        ]);
     }
-    
+
     #[Route(path: '/event/{id}', name: 'event_show')]
     public function show(Event $event): Response
     {
@@ -64,7 +63,7 @@ class EventController extends AbstractController
     #[Route(path: 'event/sub/{id}', name: 'event_sub')]
     public function eventSub(Event $event, EntityManagerInterface $entityManager): Response
     {
-        
+
         $user = $this->security->getUser();
         $event->addMember($user);
         $entityManager->persist($event);
@@ -72,7 +71,7 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('events_index');
     }
-  
+
     #[Route(path: 'event/unsub/{id}', name: 'event_unsub')]
     public function eventUnsub(Event $event, EntityManagerInterface $entityManager): Response
     {
@@ -83,11 +82,11 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('events_index');
     }
-  
+
     #[Route(path: '/createEvent', name: 'events_create')]
     public function createEvent(Request $request, EntityManagerInterface $entityManager): Response
     {
-        
+
         $event = new Event();
 
         $eventCreateForm = $this->createForm(EventOutType::class, $event);
@@ -103,7 +102,7 @@ class EventController extends AbstractController
             return $this->redirectToRoute('events_index');
         }
 
-        return $this->render('event/createEvent.html.twig', [
+        return $this->render('event/new', [
             'eventCreateForm' => $eventCreateForm->createView(),
             //'eventCreateFormCity' => $eventCreateFormCity->createView()
         ]);
@@ -127,14 +126,14 @@ class EventController extends AbstractController
     }
 
     #[Route(path: 'event/annuler/{id}', name: 'event_annuler')]
-    public function eventAnnuler($id,Event $event, EntityManagerInterface $entityManager): Response
+    public function eventAnnuler($id, Event $event, EntityManagerInterface $entityManager): Response
     {
         $newState = $entityManager->getRepository(State::class)->find(12);
 
         if (!$newState) {
             throw $this->createNotFoundException('État non trouvé avec l\'ID 12');
         }
-        if(!$entityManager->getRepository(State::class)->find(10)){
+        if (!$entityManager->getRepository(State::class)->find(10)) {
             $event->setState($newState);
 
             $entityManager->persist($event);
@@ -142,11 +141,9 @@ class EventController extends AbstractController
 
 
             return $this->redirectToRoute('events_index');
-        }else{
-            $this->addFlash("error",'Impossible de changer le status si levent a commencé mec');
-
+        } else {
+            $this->addFlash("error", 'Impossible de changer le status si levent a commencé mec');
         }
         return $this->redirectToRoute('event_show', ['id' => $id]);
     }
-
 }

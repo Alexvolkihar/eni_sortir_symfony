@@ -3,101 +3,102 @@
 {% endblock %}
 
 {% block body %}
-	<div class="min-h-screen bg-gray-100 flex flex-col justify-center py-2 sm:px-6 lg:px-8">
+<section class="w-full flex flex-col lg:flex-row lg:justify-start items-start lg:mt-32 mt-10">
+    <div class="w-full lg:w-1/3 text-center lg:text-right">
+		{% if app.user.avatar %}
+            <img src="{{ asset('/img/avatar/' ~ app.user.avatar) }}" alt="{{app.    user.avatar}}" class="w-1/4 lg:w-1/2 inline-block mr-0 rounded-full lg:rounded  ">
+        {% else %}
+            <img src="{{ asset('/img/sortirImg.png') }}" alt="Dummy image" class="w-1/4 lg:w-1/2 inline-block mr-0 rounded-full lg:rounded">
+        {% endif %}
+    </div>
+    <form method="post" class="w-full md:min-w-fit lg:w-1/3 px-8" enctype="multipart/form-data">
+            <h1 class="text-2xl font-bold mb-8 text-center">Modifier mon profil</h1>
+            {{ form_errors(registrationForm) }}
+            {{ form_start(registrationForm) }}
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.pseudo, 'Pseudo :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.pseudo, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Adresse'
+                }
+            }) }}
+            </div>
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.name, 'Prénom :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.name, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Prénom'
+                }
+            }) }}
+            </div>
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.lastname, 'Nom :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.lastname, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Nom'
+                }
+            }) }}
+            </div>
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.phone, 'Téléphone :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.phone, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Téléphone'
+                }
+            }) }}
+            </div>
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.email, 'Email :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.email, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Email'
+                }
+            }) }}
+            </div>
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.plainPassword, 'Mot de passe :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.plainPassword, {
+                'required': false,
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Mot de passe'
+                }
+            }) }}
+            </div>
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.site, 'Ville de rattachement :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.site, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Site'
+                }
+            }) }}
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('registration') }}">
+            <div class="mb-6 flex justify-between">
+                {{ form_label(registrationForm.avatar, 'Ma photo :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.avatar, {
+                'name': 'avatar',
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'avatar'
+                }
+            }) }}
+            </div>
 
 
-		<div class="flex justify-center items-center">
-			<form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" enctype="multipart/form-data">
-				<h1 class="text-center mb-6 text-3xl font-extrabold text-gray-900">Modifier mon profil</h1>
-
-				{{ form_errors(registrationForm) }}
-
-				{{ form_start(registrationForm) }}
-				<div class="mb-4">
-					{{ form_row(registrationForm.email, {
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-blue-500 focus:border-blue-500',
-                        'placeholder': 'Email'
-                    }
-                }) }}
-				</div>
-				<div class="mb-4">
-					{{ form_row(registrationForm.plainPassword, {
-                    'label': 'Mot de passe',
-                    'required': false,
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-blue-500 focus:border-blue-500',
-                        'placeholder': 'Mot de passe'
-                    }
-                }) }}
-				</div>
-				<div class="mb-4">
-					{{ form_row(registrationForm.name, {
-                    'label': 'Prénom',
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-blue-500 focus:border-blue-500',
-                        'placeholder': 'Prénom'
-                    }
-                }) }}
-				</div>
-				<div class="mb-4">
-					{{ form_row(registrationForm.lastname, {
-                    'label': 'Nom',
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-blue-500 focus:border-blue-500',
-                        'placeholder': 'Nom'
-                    }
-                }) }}
-				</div>
-				<div class="mb-4">
-					{{ form_row(registrationForm.phone, {
-                    'label': 'Téléphone',
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-blue-500 focus:border-blue-500',
-                        'placeholder': 'Téléphone'
-                    }
-                }) }}
-				</div>
-				<div class="mb-4">
-					{{ form_row(registrationForm.pseudo, {
-                    'label': 'Pseudo',
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-blue-500 focus:border-blue-500',
-                        'placeholder': 'Adresse'
-                    }
-                }) }}
-				</div>
-				<div class="mb-4">
-					{{ form_row(registrationForm.site, {
-                    'label': 'Site',
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-blue-500 focus:border-blue-500',
-                        'placeholder': 'Site'
-                    }
-                }) }}
-				</div>
-                <div class="mb-4">
-                    {{ form_row(registrationForm.avatar, {
-                    'label': 'avatar',
-                    'name': 'avatar',
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring-blue-500 focus:border-blue-500',
-                        'placeholder': 'avatar'
-                    }
-                }) }}
-                </div>
-
-				<input type="hidden" name="_csrf_token" value="{{ csrf_token('registration') }}">
-
-				<div class="flex items-center justify-between text-white font-bold">
-					<button class="bg-gray-700 border-4 border-y-indigo-200 border-x-indigo-500 text-white rounded-md px-5 py-2 text-md font-medium m-auto hover:bg-gray-600" type="submit">
-						Enregistrer
-					</button>
-					<button class="bg-gray-700 border-4 border-y-indigo-200 border-x-indigo-500 text-white rounded-md px-5 py-2 text-md font-medium m-auto hover:bg-gray-600">
-						<a href="{{ path('profile_index') }}">Annuler</a>
-					</button>
-				</div>
-				{{ form_end(registrationForm) }}
-			</form>
-		</div>
-	{% endblock %}
+            <div class="flex justify-center">
+                <button class="bg-gray-700 border-4 border-y-indigo-200 border-x-indigo-500 text-white rounded-md px-5 py-2 text-md font-medium mr-4 hover:bg-gray-600" type="submit">
+                    Enregistrer
+                </button>
+                    <a class="block bg-gray-700 border-4 border-y-indigo-200 border-x-indigo-500 text-white rounded-md px-5 py-2 text-md font-medium hover:bg-gray-600" href="{{ path('profile_show', {'id':app.user.id}) }}">Annuler</a>
+            </div>
+            {{ form_end(registrationForm) }}
+        </form>
+</section>
+{% endblock %}
