@@ -23,50 +23,53 @@ class ProfileController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(): Response
     {
+        
         return $this->render('profile/index.html.twig', [
             'controller_name' => 'ProfileController',
         ]);
     }
     #[Route('/edit', name: 'edit')]
-    public function edit(Request $request, UserAuthenticatorInterface $userAuthenticator,UserRepository $userRepository, AppAuthenticator $authenticator, EntityManagerInterface $entityManager, Uploader $uploader): Response
+    public function edit(Request $request, UserAuthenticatorInterface $userAuthenticator, UserRepository $userRepository, AppAuthenticator $authenticator, EntityManagerInterface $entityManager, Uploader $uploader): Response
     {
         $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
         $form = $this->createForm(RegistrationFormType::class, $user, [
             'mapped' => false,
         ]);
-
-        // Remove fields as needed
         $form
             ->remove('agreeTerms')     // Exclude the agreeTerms field
             ->remove('isAdmin')        // Exclude the isAdmin field
             ->remove('isActive');     // Exclude the isActive field
-
         $form->handleRequest($request);
+        /**
+         * @var UploadedFile $avatar
+         */
 
+        $avatar = $form->get('avatar')->getData();
         if ($form->isSubmitted() && $form->isValid()) {
 
+            if ($avatar) {
                 $user->setAvatar(
-                    $uploader->upload($form->get('avatar')->getData(),
+                    $uploader->upload(
+                        $avatar,
                         $this->getParameter('upload_avatar_dir'),
-                        $user->getName()));
-            
-
+                        $user->getName()
+                    )
+                );
+            }
             $entityManager->persist($user);
             $entityManager->flush();
-
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
                 $request
             );
         }
-
         return $this->render('profile/edit.html.twig', [
             'controller_name' => 'ProfileController',
             'registrationForm' => $form->createView(),
         ]);
     }
-    
+
     #[Route(('/{id}'), name: 'show')]
     public function show(User $user): Response
     {

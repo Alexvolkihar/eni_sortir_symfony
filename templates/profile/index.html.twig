@@ -7,7 +7,13 @@
 	<div class="flex justify-center items-center h-screen">
 		<div class="w-full max-w-4xl flex">
 			<div class="w-1/3 flex justify-center items-center">
-				<img src="{{ asset('/img/sortirImg.png') }}" alt="Dummy image" class="w-full rounded">
+				{% if app.user.avatar %}
+					<img src="{{ asset('/img/avatar/' ~ app.user.avatar) }}" alt="{{app.user.avatar}}" class="w-full rounded">
+					
+				{% else %}
+					<img src="{{ asset('/img/sortirImg.png') }}" alt="Dummy image" class="w-full rounded">
+
+				{% endif %}
 			</div>
 			<div class="w-2/3 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto">
 				<h1 class="text-center mb-6">
