@@ -56,9 +56,10 @@
 					{% endfor %}
 				</tbody>
 			</table>
-			{% if app.user == event.host %}
-				-<a href="{{path('event_annuler', {'id': event.id})}}">Annulée</a>
+			{% if app.user == event.host or is_granted("ROLE_ADMIN") %}
+				<a href="{{path('event_annuler', {'id': event.id})}}">Annuler</a>
 			{% endif %}
+
 		</div>
 	</div>
 {% endblock %}
