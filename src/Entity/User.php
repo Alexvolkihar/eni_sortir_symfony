@@ -269,7 +269,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPseudo(): ?string
     {
-        return $this->pseudo;
+        return $this->pseudo; 
     }
 
     public function setPseudo(string $pseudo): static
