@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
+{% block title %}
+    Bienvenue sur Sortir!
+{% endblock %}
 {% block body %}
-<h1 class="md:text-right text-xl my-2">
+<h1 class="md:text-right text-xl text-indigo-500 my-2">
     <span class="hidden md:inline">
         Date du jour : {{"now"|date('d/m/Y')}}<br/>
         Participant : {{app.user.name}} {{app.user.lastname}}
     </span>
     <span class="md:hidden">Mes sorties<span>
 </h1>
-<section class="break-words hidden md:flex mb-4 w-full p-4 bg-white border border-indigo-200 rounded shadow">
+<section class="break-words hidden md:flex mb-4 w-full p-4 border border-indigo-200 shadow-sm shadow-indigo-500">
     {{ form_start(eventsSearchForm, {'attr': {'class' :' w-full flex flex-col lg:flex-row items-center'}}) }}
         <div class="w-full lg:w-2/5 pr-4">
             <div class="w-full flex items-center justify-between mb-2">
@@ -38,12 +41,12 @@
         <thead class="table w-full table-fixed sticky bg-gray-700 text-white">
             <th class="px-4 py-2">Nom de la sortie</th>
             <th class="px-4 py-2">Date de la sortie</th>
-            <th class="px-4 py-2 ">Clôture</th>
-            <th class="px-4 py-2 ">Inscrits/Places</th>
-            <th class="px-4 py-2 ">Etat</th>
-            <th class="px-4 py-2 ">Inscrit</th>
-            <th class="px-4 py-2 ">Organisateur</th>
-            <th class="px-4 py-2 ">Action</th>
+            <th class="px-4 py-2">Clôture</th>
+            <th class="px-4 py-2">Inscrits/Places</th>
+            <th class="px-4 py-2">Etat</th>
+            <th class="px-4 py-2">Inscrit</th>
+            <th class="px-4 py-2">Organisateur</th>
+            <th class="px-4 py-2">Action</th>
         </thead>
 
         <tbody class="max-h-[32rem] text-sm lg:text-base block overflow-hidden hover:overflow-y-auto">
