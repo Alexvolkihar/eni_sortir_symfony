@@ -90,8 +90,8 @@ class EventController extends AbstractController
         $event = new Event();
 
         $eventCreateForm = $this->createForm(EventOutType::class, $event);
-        $test = $this->getUser();
-        $event->setHost($test);
+        $user = $this->getUser();
+        $event->setHost($user);
         $eventCreateForm->handleRequest($request);
         // $eventCreateFormCity->handleRequest($request);
 
@@ -99,10 +99,10 @@ class EventController extends AbstractController
 
             $entityManager->persist($event);
             $entityManager->flush();
-            return $this->redirectToRoute('events_index');
+            return $this->redirectToRoute('event_show', ['id' => $event->getId()]);
         }
 
-        return $this->render('event/new', [
+        return $this->render('event/new.html.twig', [
             'eventCreateForm' => $eventCreateForm->createView(),
             //'eventCreateFormCity' => $eventCreateFormCity->createView()
         ]);
