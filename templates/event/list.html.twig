@@ -1,38 +1,45 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<h1 class="md:text-right text-xl mt-4">
-    <span class="hidden md:inline">
-        Date du jour : {{"now"|date('d/m/Y')}}<br/>
-        Participant : {{app.user.name}} {{app.user.lastname}}
-    </span>
-    <span class="md:hidden">Mes sorties<span>
-</h1>
-<section class="break-words hidden md:flex mb-4 w-full p-4 bg-white border rounded shadow">
-        {{ form_start(eventsSearchForm, {'attr': {'class' :' w-full flex flex-row align-middle'}}) }}
-        <div class="w-1/3 mr-4 pr-4">
-            <div class="w-full flex align-middle justify-between mb-2">
-            {{ form_label(eventsSearchForm.site, null) }}
-            {{ form_widget(eventsSearchForm.site,{'attr': {'class': 'inline-block ml-8 px-2 py-1 bg-white border rounded-md'}}) }}
-            </div>
+	<h1 class="md:text-right text-xl mt-4">
+		<span class="hidden md:inline">
+			Date du jour :
+			{{"now"|date('d/m/Y')}}<br/>
+			Participant :
+			{{app.user.name}}
+			{{app.user.lastname}}
+		</span>
+		<span class="md:hidden">Mes sorties<span></h1>
+			<section class="break-words hidden md:flex mb-4 w-full p-4 bg-white border rounded shadow">
+				{{ form_start(eventsSearchForm, {'attr': {'class' :' w-full flex flex-row align-middle'}}) }}
+				<div class="w-1/3 mr-4 pr-4">
+					<div class="w-full flex align-middle justify-between mb-2">
+						{{ form_label(eventsSearchForm.site, null) }}
+						{{ form_widget(eventsSearchForm.site,{'attr': {'class': 'inline-block ml-8 px-2 py-1 bg-white border rounded-md'}}) }}
+					</div>
 
-            <div class="w-full flex align-middle justify-between mb-2">
-            {{ form_label(eventsSearchForm.name, null) }}
-            {{ form_widget(eventsSearchForm.name,{'attr': {'class': 'inline-block px-2 py-1 bg-white border rounded-md'}}) }}
-            </div>
+					<div class="w-full flex align-middle justify-between mb-2">
+						{{ form_label(eventsSearchForm.name, null) }}
+						{{ form_widget(eventsSearchForm.name,{'attr': {'class': 'inline-block px-2 py-1 bg-white border rounded-md'}}) }}
+					</div>
 
-            {{ form_label(eventsSearchForm.betweenFirstDate, null) }} {{ form_widget(eventsSearchForm.betweenFirstDate,{'attr': {'class': 'inline px-2 py-1 bg-white border rounded-md'}}) }}
-            {{ form_label(eventsSearchForm.betweenLastDate, null) }} {{ form_widget(eventsSearchForm.betweenLastDate,{'attr': {'class': 'inline px-2 py-1 bg-white border rounded-md'}}) }}
+					{{ form_label(eventsSearchForm.betweenFirstDate, null) }}
+					{{ form_widget(eventsSearchForm.betweenFirstDate,{'attr': {'class': 'inline px-2 py-1 bg-white border rounded-md'}}) }}
+					{{ form_label(eventsSearchForm.betweenLastDate, null) }}
+					{{ form_widget(eventsSearchForm.betweenLastDate,{'attr': {'class': 'inline px-2 py-1 bg-white border rounded-md'}}) }}
 
-        </div>
-        <div class="w-1/3 mr-4 pr-4">
-            {{ form_widget(eventsSearchForm.isHost,{'attr': {'class': 'px-2 py-1 bg-white border rounded-md'}}) }} {{ form_label(eventsSearchForm.isHost, null) }}<br/>
-            {{ form_widget(eventsSearchForm.isMember,{'attr': {'class': 'px-2 py-1 bg-white border rounded-md'}}) }} {{ form_label(eventsSearchForm.isMember, null) }}<br/>
-            {{ form_widget(eventsSearchForm.notMember,{'attr': {'class': 'px-2 py-1 bg-white border rounded-md'}}) }} {{ form_label(eventsSearchForm.notMember, null) }}<br/>
-            {{ form_widget(eventsSearchForm.passed,{'attr': {'class': 'px-2 py-1 bg-white border rounded-md'}}) }} {{ form_label(eventsSearchForm.passed, null) }}
-        </div>
-        <button type="submit" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-5 py-2 text-md font-medium my-auto hover:bg-gray-600">Chercher</button>
-        {{ form_end(eventsSearchForm) }}
-
+				</div>
+				<div class="w-1/3 mr-4 pr-4">
+					{{ form_widget(eventsSearchForm.isHost,{'attr': {'class': 'px-2 py-1 bg-white border rounded-md'}}) }}
+					{{ form_label(eventsSearchForm.isHost, null) }}<br/>
+					{{ form_widget(eventsSearchForm.isMember,{'attr': {'class': 'px-2 py-1 bg-white border rounded-md'}}) }}
+					{{ form_label(eventsSearchForm.isMember, null) }}<br/>
+					{{ form_widget(eventsSearchForm.notMember,{'attr': {'class': 'px-2 py-1 bg-white border rounded-md'}}) }}
+					{{ form_label(eventsSearchForm.notMember, null) }}<br/>
+					{{ form_widget(eventsSearchForm.passed,{'attr': {'class': 'px-2 py-1 bg-white border rounded-md'}}) }}
+					{{ form_label(eventsSearchForm.passed, null) }}
+				</div>
+				<button type="submit" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-5 py-2 text-md font-medium my-auto hover:bg-gray-600">Chercher</button>
+				{{ form_end(eventsSearchForm) }}
 
 
 			</div>
@@ -50,45 +57,55 @@
 					<th class="border px-4 py-2 ">Action</th>
 				</thead>
 
-        <tbody class="max-h-[32rem] block overflow-hidden  hover:overflow-y-auto">
-        {% for event in events %}
-            <tr class="table w-full table-fixed">
-                <td class="border px-4 py-2"><a href="#">{{ event.name }}</a></td>
-                <td class="border px-4 py-2">{{ event.startDateTime | date('d/m/Y H\\Hm') }}</td>
-                <td class="border px-4 py-2 ">{{ event.subDateLimit  | date('d/m/Y') }}</td>
-                <td class="border px-4 py-2 ">{{ event.members.count}}/{{event.nbMaxSub}}</td>
-                <td class="border px-4 py-2 ">{{ event.state.label }}</td>
-                <td class="border px-4 py-2 text-center ">{% if event.members.contains(app.user) %}X{% endif %}</td>
-                <td class="border px-4 py-2 "><a href="#">{{ event.host.name }} {{ event.host.lastname }}</a></td>
-                <td class="border px-4 py-2 ">
-                    <a href="#">Afficher</a><br/>
-                    {% if date() < date(event.subDateLimit) and app.user != event.host and not event.members.contains(app.user) and event.members.count < event.nbMaxSub %}
-                        <a href="#">S'inscrire</a><br/>
-                    {% endif %}
-                    {% if app.user != event.host and event.members.contains(app.user) %}
-                        <a href="#">Se désinscrire</a><br/>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <table class=" md:hidden m-auto bg-white rounded shadow">
-        <thead class="table w-full table-fixed sticky rounded top-0 bg-gray-400">
-            <th class="border px-4 py-2">Nom de la sortie</th>
-            <th class="border px-4 py-2">Date de la sortie</th>
-            <th class="border px-4 py-2">Lieu</th>
-        </thead>
+				<tbody class="max-h-[32rem] block overflow-hidden  hover:overflow-y-auto">
+					{% for event in events %}
+						<tr class="table w-full table-fixed">
+							<td class="border px-4 py-2">
+								<a href="#">{{ event.name }}</a>
+							</td>
+							<td class="border px-4 py-2">{{ event.startDateTime | date('d/m/Y H\\Hm') }}</td>
+							<td class="border px-4 py-2 ">{{ event.subDateLimit  | date('d/m/Y') }}</td>
+							<td class="border px-4 py-2 ">{{ event.members.count}}/{{event.nbMaxSub}}</td>
+							<td class="border px-4 py-2 ">{{ event.state.label }}</td>
+							<td class="border px-4 py-2 text-center ">
+								{% if event.members.contains(app.user) %}X
+								{% endif %}
+							</td>
+							<td class="border px-4 py-2 ">
+								<a href="{{ path('profile_show', {'id': event.host.id}) }}">{{ event.host.name }}
+									{{ event.host.lastname }}</a>
+							</td>
+							<td class="border px-4 py-2 ">
+								<a href="{{ path('event_show', {'id': event.id}) }}">Afficher</a><br/>
+								{% if date() < date(event.subDateLimit) and app.user != event.host and not event.members.contains(app.user) and event.members.count < event.nbMaxSub %}
+									<a href="{{path('event_sub', {'id': event.id})}}">S'inscrire</a><br/>
+								{% endif %}
+								{% if app.user != event.host and event.members.contains(app.user) %}
+									<a href="{{path('event_unsub', {'id': event.id})}}">Se désinscrire</a><br/>
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<table class=" md:hidden m-auto bg-white rounded shadow">
+				<thead class="table w-full table-fixed sticky rounded top-0 bg-gray-400">
+					<th class="border px-4 py-2">Nom de la sortie</th>
+					<th class="border px-4 py-2">Date de la sortie</th>
+					<th class="border px-4 py-2">Lieu</th>
+				</thead>
 
-        <tbody class="h-[28rem] block overflow-hidden  hover:overflow-y-auto">
-        {% for event in events %}
-                <tr class="table w-full table-fixed">
-                    <td class="border px-4 py-2"><a href="#">{{ event.name }}</a></td>
-                    <td class="border px-4 py-2">{{ event.startDateTime | date('d/m/Y H\\Hm') }}</td>
-                    <td class="border px-4 py-2 ">{{ event.place.city.name }}</td>
-                </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</section>
-{% endblock %}
+				<tbody class="h-[28rem] block overflow-hidden  hover:overflow-y-auto">
+					{% for event in events %}
+						<tr class="table w-full table-fixed">
+							<td class="border px-4 py-2">
+								<a href="#">{{ event.name }}</a>
+							</td>
+							<td class="border px-4 py-2">{{ event.startDateTime | date('d/m/Y H\\Hm') }}</td>
+							<td class="border px-4 py-2 ">{{ event.place.city.name }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</section>
+	{% endblock %}

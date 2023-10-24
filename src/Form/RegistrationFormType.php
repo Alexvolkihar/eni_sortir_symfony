@@ -7,6 +7,7 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,7 +21,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
-            
+
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
@@ -41,6 +42,14 @@ class RegistrationFormType extends AbstractType
                 'choice_label' => 'name',
                 'placeholder' => 'Choisissez un site',
             ])
+            ->add('avatar', FileType::class, [
+                'label' => 'Avatar (JPG, PNG, GIF)',
+                'mapped' => false,
+                'required' => false,
+                'attr' => [
+                    'accept' => '.jpg, .jpeg, .png, .gif',
+                ],
+            ])
             ->add('isAdmin', CheckboxType::class)
             ->add('isActive', CheckboxType::class)
             ->add('agreeTerms', CheckboxType::class, [
@@ -50,8 +59,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
