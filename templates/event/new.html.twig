@@ -10,7 +10,7 @@
 				<h1 class="text-2xl font-bold mb-4 text-center">Créer une sortie</h1>
 				{{ form_start(eventCreateForm) }}
 				<div class="mb-4">
-					{{ form_row(eventCreateForm.name, {'attr': {'class': 'fshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Nom de l\'événement'}}) }}
+					{{ form_row(eventCreateForm.name, {'attr': {'class': 'fshadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Nom de l\'événement'}}) }}
                     </div>
 <div class="mb-4">
     <div class="flex justify-between">
@@ -26,17 +26,17 @@
     </div>
 </div>
 		<div class="mb-4">
-			{{ form_row(eventCreateForm.nbMaxSub, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Nombre maximum de participants'}}) }}
+			{{ form_row(eventCreateForm.nbMaxSub, {'attr': {'class': 'shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Nombre maximum de participants'}}) }}
 		</div>
 
 		<div class="mb-4">
-			{{ form_row(eventCreateForm.eventInfo, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Description et informations'}}) }}
+			{{ form_row(eventCreateForm.eventInfo, {'attr': {'class': 'shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Description et informations'}}) }}
 		</div>
 		<div class="mb-4">
-			{{ form_row(eventCreateForm.place, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Lieu de l\'événement'}}) }}
+			{{ form_row(eventCreateForm.place, {'attr': {'class': 'shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Lieu de l\'événement'}}) }}
 				</div>
 				<div class="mb-4">
-					{{ form_row(eventCreateForm.site, {'attr': {'class': 'form-select shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Site organisateur'}}) }}
+					{{ form_row(eventCreateForm.site, {'attr': {'class': 'form-select shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', 'placeholder': 'Site organisateur'}}) }}
 				</div>
 				<button type="submit" class="bg-gray-700 border-4 border-y-indigo-200 border-x-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600">Créer l'événement</button>
 				{{ form_end(eventCreateForm) }}

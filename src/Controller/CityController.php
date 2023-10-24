@@ -14,10 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class CityController extends AbstractController
 {
     #[Route('/city', name: 'app_city')]
-    public function index(CityRepository $cityRepository, EntityManagerInterface $entityManager,Request $request): Response
+    public function index(CityRepository $cityRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         $city = new City();
-        $form = $this->createForm( CityType::class ,$city);
+        $form = $this->createForm(CityType::class, $city);
         $form->handleRequest($request);
         $cities  = $cityRepository->findAll();
         if ($form->isSubmitted() && $form->isValid()) {
@@ -25,7 +25,7 @@ class CityController extends AbstractController
             $entityManager->flush();
             $cities  = $cityRepository->findAll();
         }
-        return $this->render('gerer_ville/city.html.twig', [
+        return $this->render('city/city.html.twig', [
             "city" => $cities,
             "form" => $form->createView()
         ]);
@@ -35,8 +35,8 @@ class CityController extends AbstractController
     public function delete(
         int $id,
         EntityManagerInterface $entityManager,
-        CityRepository        $cityRepository): \Symfony\Component\HttpFoundation\RedirectResponse
-    {
+        CityRepository        $cityRepository
+    ): \Symfony\Component\HttpFoundation\RedirectResponse {
         $city = $cityRepository->find($id);
 
         $entityManager->remove($city);
@@ -44,5 +44,4 @@ class CityController extends AbstractController
         $this->addFlash('success', 'Ville ' . $city->getName() . ' Supprimer !');
         return $this->redirectToRoute("app_city");
     }
-
 }
