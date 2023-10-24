@@ -18,7 +18,7 @@ class State
     #[ORM\Column(length: 17)]
     private ?string $label = null;
 
-    #[ORM\OneToMany(mappedBy: 'state', targetEntity: Event::class, cascade: ['remove'])]
+    #[ORM\OneToMany(mappedBy: 'state', targetEntity: Event::class)]
     private Collection $events;
 
     public function __construct()

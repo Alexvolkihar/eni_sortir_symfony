@@ -46,11 +46,11 @@ class Event
     #[ORM\JoinColumn(nullable: false)]
     private ?Site $site = null;
 
-    #[ORM\ManyToOne(cascade: ['remove'], inversedBy: 'events')]
+    #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $host = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'subEvents', cascade: ['remove'])]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'subEvents')]
     private Collection $members;
 
     public function __construct()
