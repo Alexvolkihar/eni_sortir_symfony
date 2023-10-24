@@ -31,15 +31,15 @@ class CityController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'app_delete', requirements: ['id' => '[0-9]+'])]
+    #[Route('/city/delete/{id}', name: 'app_delete_city', requirements: ['id' => '[0-9]+'])]
     public function delete(
         int $id,
         EntityManagerInterface $entityManager,
         CityRepository        $cityRepository): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         $city = $cityRepository->find($id);
-        $entityManager->remove($city);
 
+        $entityManager->remove($city);
         $entityManager->flush();
         $this->addFlash('success', 'Ville ' . $city->getName() . ' Supprimer !');
         return $this->redirectToRoute("app_city");

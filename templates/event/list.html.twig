@@ -58,14 +58,14 @@
                 <td class="border border-r-indigo-200 px-4 py-2 ">{{ event.members.count}}/{{event.nbMaxSub}}</td>
                 <td class="border border-r-indigo-200 px-4 py-2 ">{{ event.state.label }}</td>
                 <td class="border border-r-indigo-200 px-4 py-2 text-center ">{% if event.members.contains(app.user) %}X{% endif %}</td>
-                <td class="border border-r-indigo-200 px-4 py-2 "><a href="#" class="hover:underline underline-offset-4 decoration-2 decoration-indigo-500">{{ event.host.name }} {{ event.host.lastname }}</a></td>
+                <td class="border border-r-indigo-200 px-4 py-2 "><a href="{{path('profile_show', {'id':event.host.id}) }}" class="hover:underline underline-offset-4 decoration-2 decoration-indigo-500">{{ event.host.name }} {{ event.host.lastname }}</a></td>
                 <td class="border px-4 py-2 ">
-                    <a href="#" class="hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Afficher</a><br/>
+                    <a href="{{path('event_show', {'id':event.id}) }}" class="hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Afficher</a><br/>
                     {% if date() < date(event.subDateLimit) and app.user != event.host and not event.members.contains(app.user) and event.members.count < event.nbMaxSub %}
-                        <a href="#" class="hover:underline underline-offset-4 decoration-2 decoration-indigo-500">S'inscrire</a><br/>
+                        <a href="{{path('event_sub', {'id':event.id}) }}" class="hover:underline underline-offset-4 decoration-2 decoration-indigo-500">S'inscrire</a><br/>
                     {% endif %}
                     {% if app.user != event.host and event.members.contains(app.user) %}
-                        <a href="#" class="hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Se désinscrire</a><br/>
+                        <a href="{{path('event_unsub', {'id':event.id}) }}" class="hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Se désinscrire</a><br/>
                     {% endif %}
                 </td>
             </tr>
@@ -82,7 +82,7 @@
         <tbody class="max-h-[28rem] text-sm lg:text-base block overflow-hidden  hover:overflow-y-auto">
         {% for event in events %}
                 <tr class="table w-full table-fixed">
-                    <td class="border border-r-indigo-200 px-4 py-2"><a href="#" class="hover:underline underline-offset-4 decoration-2 decoration-indigo-500">{{ event.name }}</a></td>
+                    <td class="border border-r-indigo-200 px-4 py-2"><a href="{{path('event_show', {'id':event.id}) }}" class="hover:underline underline-offset-4 decoration-2 decoration-indigo-500">{{ event.name }}</a></td>
                     <td class="border border-r-indigo-200 px-4 py-2">{{ event.startDateTime | date('d/m/Y H\\Hm') }}</td>
                     <td class="border border-r-indigo-200 px-4 py-2 ">{{ event.place.city.name }}</td>
                 </tr>

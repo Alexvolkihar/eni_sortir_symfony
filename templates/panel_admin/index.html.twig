@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanelAdminController!{% endblock %}
+
+{% block body %}
+    <div class="flex mb-4 my-4">
+
+        <div class="w-3/4 p-4 bg-white border rounded shadow">
+            <p class="text-xl my-4">Panel Admin</p>
+
+            <div class="w-full p-4 bg-white border rounded shadow">
+                <div id="table-container" class="overflow-y-auto md:max-h-[35rem] ">
+                    <table class="min-w-full">
+
+                        <thead>
+                        <tr class="sticky top-0 w-full bg-gray-400 z-50">
+                            <th class="border px-4 py-2">Nom</th>
+                            <th class="border px-4 py-2">Prénom</th>
+                            <th class="border px-4 py-2">Phone</th>
+                            <th class="border px-4 py-2">Email</th>
+                            <th class="border px-4 py-2">Pseudo</th>
+                            <th class="border px-4 py-2">isActive</th>
+                            <th class="border px-4 py-2"></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for users in users %}
+                            <tr>
+                                <td class="border px-4 py-2">{{ users.name }}</td>
+                                <td class="border px-4 py-2">{{ users.lastname }}</td>
+                                <td class="border px-4 py-2">{{ users.phone }}</td>
+                                <td class="border px-4 py-2">{{ users.email }}</td>
+                                <td class="border px-4 py-2">{{ users.pseudo }}</td>
+                                <td class="border px-4 py-2">
+                                    {% if users.isActive %}
+                                        Actif
+                                    {% else %}
+                                        Inactif
+                                    {% endif %}
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <form method="post" action="{{ path('app_delete', {'id': users.id}) }}" >
+                                        <button type="submit" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600"> Supprimer</button>
+                                    </form>
+                                    <form method="post" action="{{ path('app_active', {'id': users.id}) }}" >
+                                        <button type="submit" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600">
+                                            {% if users.isActive %}
+                                                Désactivé
+                                            {% else %}
+                                                Activé
+                                            {% endif %}</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

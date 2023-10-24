@@ -13,6 +13,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Utils\Uploader;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+
+
 
 #[Route('/profile', name: 'profile_')]
 class ProfileController extends AbstractController
@@ -26,46 +30,47 @@ class ProfileController extends AbstractController
         ]);
     }
     #[Route('/edit', name: 'edit')]
-    public function edit(Request $request, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator, EntityManagerInterface $entityManager, Uploader $uploader): Response
+    public function edit(Request $request, UserAuthenticatorInterface $userAuthenticator, UserRepository $userRepository, AppAuthenticator $authenticator, EntityManagerInterface $entityManager, Uploader $uploader): Response
     {
-        $user = $this->getUser();
+        $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
         $form = $this->createForm(RegistrationFormType::class, $user, [
-            'mapped' => false, // Désactive le mappage par défaut des champs du formulaire à l'objet User
+            'mapped' => false,
         ]);
-
-        // Remplacez les champs que vous souhaitez utiliser pour la mise à jour
         $form
-            ->remove('agreeTerms')     // Exclut le champ agreeTerms
-            ->remove('isAdmin')        // Exclut le champ isAdmin
-            ->remove('isActive');    // Exclut le champ isActive
-
+            ->remove('agreeTerms')     // Exclude the agreeTerms field
+            ->remove('isAdmin')        // Exclude the isAdmin field
+            ->remove('isActive');     // Exclude the isActive field
         $form->handleRequest($request);
+        /**
+         * @var UploadedFile $avatar
+         */
 
+        $avatar = $form->get('avatar')->getData();
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // $user->setAvatar(
-            //     $uploader->upload(
-            //         $form->get('avatar')->getData(),
-            //         $this->getParameter('upload_avatar_dir'),
-            //         $user->getName()
-            //     )
-            // );
-
+            if ($avatar) {
+                $user->setAvatar(
+                    $uploader->upload(
+                        $avatar,
+                        $this->getParameter('upload_avatar_dir'),
+                        $user->getName()
+                    )
+                );
+            }
             $entityManager->persist($user);
             $entityManager->flush();
-
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
                 $request
             );
         }
-
         return $this->render('profile/edit.html.twig', [
             'controller_name' => 'ProfileController',
             'registrationForm' => $form->createView(),
         ]);
     }
+
     #[Route(('/{id}'), name: 'show')]
     public function show(User $user): Response
     {

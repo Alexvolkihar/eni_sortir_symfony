@@ -50,7 +50,7 @@ class Event
     #[ORM\JoinColumn(nullable: false)]
     private ?User $host = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'subEvents', cascade: ['remove'])]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'subEvents')]
     private Collection $members;
 
     public function __construct()

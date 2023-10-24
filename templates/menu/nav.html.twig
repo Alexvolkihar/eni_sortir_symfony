@@ -6,12 +6,10 @@
             {% if is_granted("ROLE_ADMIN") %}
                 <li><a href="{{ path('app_ville') }}" class="px-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Ville</a></li>
                 <li><a href="{{ path('app_site') }}" class="px-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Site</a></li>
-            {% else %}
+            {% endif %}
                 <li><a href="{{ path('events_index') }}" class="px-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Accueil</a></li>
                 <li><a href="{{ path('profile_index') }}" class="px-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Profil</a></li>
                 <li><a href="{{ path('app_logout') }}" class="pl-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Se déconnecter</a></li>
-
-            {% endif %}
         {% endif %}
     </ul>
 </nav>
