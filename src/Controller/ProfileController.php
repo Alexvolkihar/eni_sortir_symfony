@@ -17,15 +17,16 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 
+
 #[Route('/profile', name: 'profile_')]
 class ProfileController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(): Response
+    public function index(UserRepository $userRepository): Response
     {
-        
-        return $this->render('profile/index.html.twig', [
-            'controller_name' => 'ProfileController',
+        $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
+        return $this->render('profile/show.html.twig', [
+            'user' => $user,
         ]);
     }
     #[Route('/edit', name: 'edit')]

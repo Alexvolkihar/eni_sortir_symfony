@@ -1,36 +1,59 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}
+    Détail de {{event.name}}
+{% endblock %}
 {% block body %}
-	<div class="container mx-auto text-justify">
-		<h1 class="text-2xl font-bold mb-4 text-center">Afficher une sortie</h1>
-		<div class="grid grid-cols-2 gap-4">
-			<div>
+	<section class="mt-10">
+		<h1 class="text-2xl font-bold mb-8 text-center">Afficher une sortie</h1>
+		<div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-10 gap-y-2">
+			<div class="flex justify-between ">
 				<p class="font-bold">Nom de la sortie :</p>
 				<p>{{event.name}}</p>
-				<p class="font-bold">Date et heure de la sortie :</p>
-				<p>{{ event.startDateTime|date("d:M:Y") }}</p>
-				<p class="font-bold">Date limite d'inscription :</p>
-				<p>{{ event.subDateLimit|date("d:M:Y")}}</p>
-				<p class="font-bold">Nombre de places :</p>
-				<p>{{ event.nbMaxSub }}</p>
-				<p class="font-bold">Durée :</p>
-				<p>{{ event.duration|date("m:h") }}</p>
-				<p class="font-bold">Description et infos :</p>
-				<p>{{ event.eventInfo }}</p>
 			</div>
-			<div>
+			<div class="lg:order-none flex justify-between">
+				<p class="font-bold">Date et heure <span class="hidden lg:inline">de la sortie </span>:</p>
+				<p>{{ event.startDateTime|date("d/m/Y - h\\hm") }}</p>
+			</div>
+			<div class="flex justify-between">
 				<p class="font-bold">Ville organisatrice :</p>
 				<p>{{ event.site.name }}</p>
+			</div>
+			<div class="flex justify-between">
 				<p class="font-bold">Lieu :</p>
 				<p>{{ event.place.city.name }}</p>
+			</div>
+			<div class="flex justify-between">
 				<p class="font-bold">Rue :</p>
 				<p>{{ event.place.street }}</p>
+			</div>
+			<div class="flex justify-between">
 				<p class="font-bold">Code postal :</p>
 				<p>{{ event.place.city.postalCode }}</p>
+			</div>
+			<div class="flex justify-between">
 				<p class="font-bold">Latitude :</p>
 				<p>{{ event.place.latitude }}</p>
+			</div>
+			<div class="flex justify-between">
 				<p class="font-bold">Longitude :</p>
 				<p>{{ event.place.longitude }}</p>
+			</div>
+			<div class="flex justify-between">
+				<p class="font-bold hidden lg:block">Date limite d'inscription :</p>
+				<p class="font-bold lg:hidden">Clôture :</p>
+				<p>{{ event.subDateLimit|date("d/m/Y")}}</p>
+			</div>
+			<div class="flex justify-between">
+				<p class="font-bold">Nombre de places :</p>
+				<p>{{ event.nbMaxSub }}</p>
+			</div>
+			<div class="flex justify-between">
+				<p class="font-bold">Durée :</p>
+				<p>{{ event.duration|date("h\\hm") }}</p>
+			</div>
+			<div class="order-last lg:order-none flex justify-between">
+				<p class="font-bold">Description et infos :</p>
+				<p class="w-2/3">{{ event.eventInfo }}</p>
 			</div>
 		</div>
 		<h2 class="text-xl font-bold my-4">Liste des participants inscrits :</h2>
@@ -61,5 +84,5 @@
 			{% endif %}
 
 		</div>
-	</div>
+	</section>
 {% endblock %}
