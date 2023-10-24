@@ -31,7 +31,7 @@ class Place
     #[ORM\JoinColumn(nullable: false)]
     private ?City $city = null;
 
-    #[ORM\OneToMany(mappedBy: 'place', targetEntity: Event::class, cascade: ['remove'])]
+    #[ORM\OneToMany(mappedBy: 'place', targetEntity: Event::class,cascade: ['remove'])]
     private Collection $events;
 
     public function __construct()

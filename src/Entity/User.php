@@ -46,10 +46,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isActive = null;
 
-    #[ORM\OneToMany(mappedBy: 'host', targetEntity: Event::class, cascade: ['remove'])]
+    #[ORM\OneToMany(mappedBy: 'host', targetEntity: Event::class)]
     private Collection $events;
 
-    #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'members', cascade: ['remove'])]
+    #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'members')]
     private Collection $subEvents;
 
     #[ORM\ManyToOne(inversedBy: 'users')]

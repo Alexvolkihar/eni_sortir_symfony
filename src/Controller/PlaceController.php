@@ -30,15 +30,15 @@ class PlaceController extends AbstractController
             "form" => $form->createView()
         ]);
     }
-    #[Route('/delete/{id}', name: 'app_delete', requirements: ['id' => '[0-9]+'])]
+    #[Route('/place/delete/{id}', name: 'app_delete_place', requirements: ['id' => '[0-9]+'])]
     public function delete(
         int $id,
         EntityManagerInterface $entityManager,
         PlaceRepository        $placeRepository): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         $place = $placeRepository->find($id);
-        $entityManager->remove($place);
 
+        $entityManager->remove($place);
         $entityManager->flush();
         $this->addFlash('success', 'truc ' . $place->getName() . ' Supprimer !');
         return $this->redirectToRoute("app_place");
