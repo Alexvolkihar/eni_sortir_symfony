@@ -1,6 +1,7 @@
 <nav class="bg-gradient-to-b from-gray-700 to-gray-600 px-10 md:px-20 lg:px-40 text-indigo-200 py-3 flex justify-between align-middle border-b-4 border-b-indigo-200">
-    <a href="{{path('events_index')}}" class="block text-xl">Sortir</a>
-    <ul class="hidden md:flex justify-between">
+    <a href="{{path('events_index')}}" class="relative text-3xl text-indigo-500">Sortir</a>
+
+    <ul class="hidden md:flex justify-between items-center">
         {% if app.user %}
             {% if is_granted("ROLE_ADMIN") %}
                 <li><a href="{{ path('app_ville') }}" class="px-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Ville</a></li>
@@ -11,8 +12,6 @@
                 <li><a href="{{ path('app_logout') }}" class="pl-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Se déconnecter</a></li>
 
             {% endif %}
-        {% else %}
-            <li><a href="{{ path('app_login') }}" class="text-white pl-4 py-3 font-medium hover:underline underline-offset-4 decoration-2 decoration-indigo-500">Se connecter</a></li>
         {% endif %}
     </ul>
 </nav>
