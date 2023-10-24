@@ -1,6 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/symfony,visualstudiocode,jetbrains,phpstorm,composer
 # Edit at https://www.toptal.com/developers/gitignore?templates=symfony,visualstudiocode,jetbrains,phpstorm,composer
-
+public/img/avatar/*
 .env.local
 .idea/
 package-lock.json
