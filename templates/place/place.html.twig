@@ -35,6 +35,7 @@
                                 <td class="border px-4 py-2">{{ place.city.name }}</td>
                                 <td class="border px-4 py-2">
 
+
                                     <form method="post" action="{{ path('app_delete_place', {'id': place.id}) }}" >
                                         <button type="submit" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600"> Supprimer</button>
                                     </form>
