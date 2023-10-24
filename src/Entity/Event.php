@@ -46,7 +46,7 @@ class Event
     #[ORM\JoinColumn(nullable: false)]
     private ?Site $site = null;
 
-    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\ManyToOne(cascade: ['remove'], inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $host = null;
 
