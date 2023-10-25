@@ -19,7 +19,7 @@
 		<header class="sticky top-0">
 			{% include 'menu/nav.html.twig' %}
 		</header>
-		<main class="px-10 md:px-20 lg:px-40">
+		<main class="px-10 md:px-20 lg:px-40 mb-10">
 			{% for message in app.flashes('success') %}
 				<div class="text-green-400 border-green-400">
 					{{ message }}
