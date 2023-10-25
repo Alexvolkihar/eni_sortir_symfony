@@ -3,108 +3,106 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-<div class="flex justify-center items-center h-screen">
-    <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h1 class="text-center mb-6">Register</h1>
+<section class="w-full flex flex-col justify-start items-center mt-10">
+    <h1 class="text-2xl font-bold mb-4 text-center">Panneau d'administration : ajouter un utilisateur</h1>
+        {{ form_start(registrationForm, {'attr' : {'class': 'w-1/3 text-center'}}) }}
 
         {{ form_errors(registrationForm) }}
-
-        {{ form_start(registrationForm) }}
-            <div class="mb-4">
-                {{ form_row(registrationForm.email, {
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
-                        'placeholder': 'Email'
-                    }
-                }) }}
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.name, 'Prénom :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.name, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Prénom'
+                }
+            }) }}
             </div>
-            <div class="mb-4">
-                {{ form_row(registrationForm.plainPassword, {
-                    'label': 'Mot de passe',
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
-                        'placeholder': 'Mot de passe'
-                    }
-                }) }}
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.lastname, 'Nom :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.lastname, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Nom'
+                }
+            }) }}
             </div>
-            <div class="mb-4">
-                {{ form_row(registrationForm.name, {
-                    'label': 'Prénom',
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
-                        'placeholder': 'Prénom'
-                    }
-                }) }}
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.pseudo, 'Pseudo :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.pseudo, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Pseudo'
+                }
+            }) }}
             </div>
-            <div class="mb-4">
-                {{ form_row(registrationForm.lastname, {
-                    'label': 'Nom',
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
-                        'placeholder': 'Nom'
-                    }
-                }) }}
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.email, 'Email :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.email, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Email'
+                }
+            }) }}
             </div>
-            <div class="mb-4">
-                {{ form_row(registrationForm.phone, {
-                    'label': 'Téléphone',
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
-                        'placeholder': 'Téléphone'
-                    }
-                }) }}
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.plainPassword, 'Mot de passe :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.plainPassword, {
+                'required': false,
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Mot de passe'
+                }
+            }) }}
             </div>
-            <div class="mb-4">
-                {{ form_row(registrationForm.pseudo, {
-                    'label': 'Pseudo',
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
-                        'placeholder': 'Adresse'
-                    }
-                }) }}
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.phone, 'Téléphone :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.phone, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Téléphone'
+                }
+            }) }}
             </div>
-            <div class="mb-4">
-                {{ form_row(registrationForm.site, {
-                    'label': 'Site',
-                    'attr': {
-                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
-                        'placeholder': 'Site'
-                    }
-                }) }}
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.site, 'Ville de rattachement :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.site, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Site'
+                }
+            }) }}
             </div>
-            <div class="mb-6">
-                {{ form_row(registrationForm.isAdmin, {
-                    'label': 'Admin ?'
-                }) }}
+            <div class="mb-2 flex justify-between">
+                {{ form_label(registrationForm.avatar, 'Avatar :', {'label_attr' : {'class':'font-bold'}})}}
+                {{ form_widget(registrationForm.avatar, {
+                'attr': {
+                    'class': 'shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500',
+                    'placeholder': 'Avatar'
+                }
+            }) }}
             </div>
-            <div class="mb-6">
-                {{ form_row(registrationForm.isActive, {
-                    'label': 'Active ?'
-                }) }}
-            </div>
-
-            <div class="mb-6">
-                {{ form_row(registrationForm.agreeTerms, {
-                    'label': 'J\'accepte les termes et conditions'
-                }) }}
+            <div class="mb-4 text-left">
+                {{ form_widget(registrationForm.isAdmin,{'attr': {'class': 'px-2 py-1 rounded-md'}}) }} {{ form_label(registrationForm.isAdmin, 'Administrateur', {'label_attr' : {'class':'font-bold'}}) }}
+                <br/>
+                {{ form_widget(registrationForm.isActive,{'attr': {'class': 'px-2 py-1 rounded-md'}}) }} {{ form_label(registrationForm.isActive, 'Actif', {'label_attr' : {'class':'font-bold'}}) }}
             </div>
 
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('registration') }}"
-            >
 
-            <div class="flex items-center justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                    Register
-                </button>
-            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('registration') }}">
+
+            <button type="submit" class="bg-gray-700 border-4 border-y-indigo-200 border-x-indigo-500 text-white rounded-md px-5 py-2 text-md font-medium mr-4 hover:bg-gray-600">Enregistrer</button>
         {{ form_end(registrationForm) }}
-    </form>
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post" enctype="multipart/form-data" action="{{ path('app_register') }}">
-        <input type="file" name="csv_file">
-        <!-- Autres champs de formulaire pour l'inscription -->
-        <button type="submit">Inscription à partir du fichier CSV</button>
-    </form>
-</div>
+
+        <h2 class="text-lg font-bold my-3 pt-3 w-1/3 border-t border-t-indigo-200 text-center">Importer depuis un fichier CSV</h2>
+
+        <form class="w-1/3 text-center" method="post" enctype="multipart/form-data" action="{{ path('app_register') }}">
+            <div class="w-full mb-4 flex justify-between">
+                <label for="csv_file" class="font-bold">Fichier CSV d'utilisateurs :</label>
+                <input type="file" name="csv_file" id="csv_file" class="shadow border rounded py-2 px-3 text-gray-700 leading-tight focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <!-- Autres champs de formulaire pour l'inscription -->
+            <button type="submit" class="bg-gray-700 border-4 border-y-indigo-200 border-x-indigo-500 text-white rounded-md px-5 py-2 text-md font-medium mr-4 hover:bg-gray-600">Importer les utilisateurs</button>
+        </form>
+</section>
 
 {% endblock %}
