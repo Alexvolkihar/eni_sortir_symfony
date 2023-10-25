@@ -2,13 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Site;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -88,6 +86,7 @@ class RegistrationController extends AbstractController
                 // do anything else you need here, like send an email
 
                 return $userAuthenticator->authenticateUser(
+
                     $user,
                     $authenticator,
                     $request
