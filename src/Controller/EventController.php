@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\City;
 use App\Entity\Event;
 use App\Entity\Place;
+use App\Entity\State;
 use App\Form\EventOutType;
 use App\Data\SearchEvent;
 use App\Form\EventSearchType;
@@ -126,14 +127,21 @@ class EventController extends AbstractController
     }
 
     #[Route(path: 'event/annuler/{id}', name: 'event_annuler')]
-    public function eventAnnuler($id, Event $event, EntityManagerInterface $entityManager): Response
-    {
-        $newState = $entityManager->getRepository(State::class)->find(12);
 
+    public function eventAnnuler($id,Event $event, EntityManagerInterface $entityManager,EventRepository $eventRepository): Response
+    {
+
+        $trouverEvent = $entityManager->getRepository(Event::class)->find($id);
+        $idEventState =$trouverEvent->getState()->getId();
+        $newState = $entityManager->getRepository(State::class)->find($idEventState);
+        $enCours = $entityManager->getRepository(State::class)->findOneBy(['label' => 'Activité en cours']);
         if (!$newState) {
-            throw $this->createNotFoundException('État non trouvé avec l\'ID 12');
+            throw $this->createNotFoundException('État non trouvé');
         }
-        if (!$entityManager->getRepository(State::class)->find(10)) {
+
+        if($enCours->getId()!=$idEventState){
+            $newState = $entityManager->getRepository(State::class)->findOneBy(['label' => 'Annulée']);
+
             $event->setState($newState);
 
             $entityManager->persist($event);
