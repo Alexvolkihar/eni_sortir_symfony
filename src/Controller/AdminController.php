@@ -13,25 +13,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PanelAdminController extends AbstractController
+class AdminController extends AbstractController
 {
-    #[Route('/panel/admin', name: 'app_panel_admin')]
+    #[Route('/admin', name: 'index_admin')]
     public function index(Request $request, UserRepository $userRepository): Response
     {
-       $admin = $this->getUser();
-       $recupeRole = $admin->getRoles();
-       $implode = implode(',',$recupeRole);
-       $user = new User();
-       $form = $this->createForm( UserType::class,$user);
-       $form->handleRequest($request);
+        $admin = $this->getUser();
+        $recupeRole = $admin->getRoles();
+        $implode = implode(',', $recupeRole);
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
 
-       $users  = $userRepository->findAll();
-       if (str_contains($implode, "ROLE_ADMIN")) {
-           return $this->render('panel_admin/index.html.twig', [
-               "users" => $users,
-               "form" => $form->createView()
-           ]);
-       }
+        $users  = $userRepository->findAll();
+        if (str_contains($implode, "ROLE_ADMIN")) {
+            return $this->render('admin/index.html.twig', [
+                "users" => $users,
+                "form" => $form->createView()
+            ]);
+        }
 
         return $this->redirectToRoute('events_index');
     }
@@ -41,7 +41,6 @@ class PanelAdminController extends AbstractController
         int $id,
         EntityManagerInterface $entityManager,
         UserRepository $userRepository,
-        EventRepository $eventRepository
     ): \Symfony\Component\HttpFoundation\RedirectResponse {
         $user = $userRepository->find($id);
 
@@ -70,23 +69,23 @@ class PanelAdminController extends AbstractController
         $entityManager->flush();
 
         $this->addFlash('success', 'Utilisateur ' . $user->getName() . ' Supprimé !');
-        return $this->redirectToRoute("app_panel_admin");
+        return $this->redirectToRoute("index_admin");
     }
 
     #[Route('/active/{id}', name: 'app_active', requirements: ['id' => '[0-9]+'])]
-    public function active(int $id,
-                           EntityManagerInterface $entityManager,
-                           UserRepository $userRepository,
-                           EventRepository $eventRepository): \Symfony\Component\HttpFoundation\RedirectResponse
-    {
+    public function active(
+        int $id,
+        EntityManagerInterface $entityManager,
+        UserRepository $userRepository,
+    ): \Symfony\Component\HttpFoundation\RedirectResponse {
         $user = $userRepository->find($id);
-        if($user->isActive()){
+        if ($user->isActive()) {
             $user->setIsActive(false);
-        }else{
+        } else {
             $user->setIsActive(true);
         }
         $entityManager->flush();
 
-        return $this->redirectToRoute("app_panel_admin");
+        return $this->redirectToRoute("index_admin");
     }
 }

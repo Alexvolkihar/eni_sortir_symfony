@@ -13,7 +13,9 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,21 +26,26 @@ class EventOutType extends AbstractType
         $builder
             ->add('name')
             ->add('startDateTime', DateType::class, [
-                'required' => true])
+                'html5' => true,
+                'widget' => "single_text",
+            ])
             ->add('subDateLimit', DateType::class, [
-                'required' => true])
-            ->add('nbMaxSub', TextType::class, [
-                'required' => true])
-            ->add('duration',DateType::class)
+                'html5' => true,
+                'widget' => "single_text",
+            ])
+            ->add('duration', TimeType::class)
+            ->add('nbMaxSub', NumberType::class, [
+                'html5' => true,
+            ])
             ->add('eventInfo', TextType::class, [
-                'label' => "Description des infos",
-                'required' => true])
-            ->add('place',EntityType::class,[
+                'label' => "Description des infos"
+            ])
+            ->add('place', EntityType::class, [
                 'class' => Place::class,
                 'choice_label' => 'name'
             ])
-            ->add('state',EntityType::class, [
-                'class'=> State::class,
+            ->add('state', EntityType::class, [
+                'class' => State::class,
                 'query_builder' => function (EntityRepository $er): QueryBuilder {
                     return $er->createQueryBuilder('u');
                 },
@@ -48,11 +55,10 @@ class EventOutType extends AbstractType
                 ],
                 'label' => false,
             ])
-            ->add('site', EntityType::class,[
+            ->add('site', EntityType::class, [
                 'class' => Site::class,
                 'choice_label' => 'name'
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -15,6 +15,8 @@ use Faker\Factory;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Constraints\Time;
 
+use function Symfony\Component\Clock\now;
+
 class AppFixtures extends Fixture
 {
     public function __construct(private UserPasswordHasherInterface $userPasswordHasher)
@@ -98,8 +100,12 @@ class AppFixtures extends Fixture
                 ->setPhone($faker->phoneNumber())
                 ->setSite($faker->randomElement($sites))
                 ->setIsAdmin($faker->boolean(30))
-                ->setIsActive($faker->boolean(70))
-                ->setRoles(['ROLE_USER']);
+                ->setIsActive($faker->boolean(70));
+            if ($user->isAdmin()) {
+                $user->setRoles(['ROLE_ADMIN']);
+            } else {
+                $user->setRoles(['ROLE_USER']);
+            }
             $manager->persist($user);
         }
         $manager->flush();
@@ -121,10 +127,19 @@ class AppFixtures extends Fixture
                 ->setNbMaxSub($faker->numberBetween(2, 20))
                 ->setSubDateLimit($faker->dateTimeBetween(new \DateTime("-3 month"), $event->getStartDateTime()))
                 ->setEventInfo($faker->text())
-                ->setState($faker->randomElement($states))
                 ->setSite($faker->randomElement($sites))
                 ->setHost($faker->randomElement($users))
                 ->setPlace($faker->randomElement($places));
+            if (date_diff($event->getStartDateTime(), now())->invert == 1) {
+                $event->setState($faker->randomElement([$states[array_search('Passée', $states)], $states[array_search('Annulée', $states)]]));
+            } else if (date_diff($event->getSubDateLimit(), now())->invert == 1) {
+                $event->setState($states[array_search('Clôturée', $states)]);
+            } else {
+                $filteredStates = array_filter($states, function ($state) {
+                    return $state->getLabel() != 'Passée' && $state->getLabel() != 'Clôturée';
+                });
+                $event->setState($faker->randomElement($filteredStates));
+            }
             $nbMember = $faker->numberBetween(2, $event->getNbMaxSub());
             for ($j = 0; $j < $nbMember; $j++) {
                 $event->addMember($faker->randomElement($users));

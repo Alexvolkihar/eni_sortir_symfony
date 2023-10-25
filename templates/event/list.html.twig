@@ -52,7 +52,7 @@
         <tbody class="max-h-[32rem] text-sm lg:text-base block overflow-hidden hover:overflow-y-auto">
         {% for event in events %}
             <tr class="table w-full table-fixed border-b-indigo-200">
-                <td class="border border-r-indigo-200 px-4 py-2"><a href="#" class="hover:underline underline-offset-4 decoration-2 decoration-indigo-500">{{ event.name }}</a></td>
+                <td class="border border-r-indigo-200 px-4 py-2"><a href="{{path('event_show', {'id':event.id}) }}" class="hover:underline underline-offset-4 decoration-2 decoration-indigo-500">{{ event.name }}</a></td>
                 <td class="border border-r-indigo-200 px-4 py-2">{{ event.startDateTime | date('d/m/Y H\\Hm') }}</td>
                 <td class="border border-r-indigo-200 px-4 py-2 ">{{ event.subDateLimit  | date('d/m/Y') }}</td>
                 <td class="border border-r-indigo-200 px-4 py-2 ">{{ event.members.count}}/{{event.nbMaxSub}}</td>

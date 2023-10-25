@@ -4,89 +4,75 @@
 
 {% block body %}
 
-    <div class="flex mb-4 my-4">
+<section class="w-full flex flex-col items-start mt-10">
+    <h1 class="text-2xl font-bold mb-8 text-center">Gérer les lieux</h1>
+    <div class="overflow-y-auto md:max-h-[40rem] ">
+        <table class="w-full break-words border-4 border-t-indigo-200 border-x-indigo-500 shadow">
+            <thead class="w-full top-0 sticky bg-gray-700 text-white">
+                    <th class="border px-4 py-2">Nom</th>
+                    <th class="border px-4 py-2">Rue</th>
+                    <th class="border px-4 py-2">Latitude</th>
+                    <th class="border px-4 py-2">Longitude</th>
+                    <th class="border px-4 py-2">Ville</th>
+                    <th class="border px-4 py-2">Action</th>
+                </thead>
 
-        <div class="w-3/4 p-4 bg-white border rounded shadow">
-            <p class="text-xl my-4">Gerer les lieux</p>
-
-
-            <div class="w-full p-4 bg-white border rounded shadow">
-                <div id="table-container" class="overflow-y-auto md:max-h-[35rem] ">
-                    <table class="min-w-full">
-
-                        <thead>
-                        <tr class="sticky top-0 w-full bg-gray-400 z-50">
-                            <th class="border px-4 py-2">Nom</th>
-                            <th class="border px-4 py-2">rue</th>
-                            <th class="border px-4 py-2">latityde</th>
-                            <th class="border px-4 py-2">longitude</th>
-                            <th class="border px-4 py-2">Ville</th>
-                            <th class="border px-4 py-2"></th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        {% for place in place %}
-                            <tr>
-                                <td class="border px-4 py-2">{{ place.name }}</td>
-                                <td class="border px-4 py-2">{{ place.street }}</td>
-                                <td class="border px-4 py-2">{{ place.latitude }}</td>
-                                <td class="border px-4 py-2">{{ place.longitude }}</td>
-                                <td class="border px-4 py-2">{{ place.city.name }}</td>
-                                <td class="border px-4 py-2">
-
-
-                                    <form method="post" action="{{ path('app_delete_place', {'id': place.id}) }}" >
-                                        <button type="submit" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600"> Supprimer</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        <form method="post">
-                            {{ form_start(form) }}
-                            <td class="border px-4 py-2">{{ form_row(form.name, {
-                                    'label': false,
-                                    'attr': {
-                                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
-                                        'placeholder': 'Nom lieux'
-                                    }
-                                }) }}</td>
-                            <td class="border px-4 py-2">{{ form_row(form.street, {
-                                    'label': false,
-                                    'attr': {
-                                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
-                                        'placeholder': 'Rue'
-                                    }
-                                }) }}</td>
-                            <td class="border px-4 py-2">{{ form_row(form.latitude, {
-                                    'label': false,
-                                    'attr': {
-                                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
-                                        'placeholder': 'Latitude'
-                                    }
-                                }) }}</td>
-                            <td class="border px-4 py-2">{{ form_row(form.longitude, {
-                                    'label': false,
-                                    'attr': {
-                                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
-                                        'placeholder': 'Longitude'
-                                    }
-                                }) }}</td>
-                            <td class="border px-4 py-2">{{ form_row(form.city, {
-                                    'label': false,
-                                    'attr': {
-                                        'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
-                                        'placeholder': 'Longitude'
-                                    }
-                                }) }}</td>
-                            <td class="border px-4 py-2"> <button type="submit" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600"> Ajouté</button></td>
-                            {{ form_end(form) }}
-                        </form>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+            <tbody>
+            {% for place in place %}
+                <tr>
+                    <td class="border border-indigo-200 px-4 py-2">{{ place.name }}</td>
+                    <td class="border border-indigo-200 px-4 py-2">{{ place.street }}</td>
+                    <td class="border border-indigo-200 px-4 py-2">{{ place.latitude }}</td>
+                    <td class="border border-indigo-200 px-4 py-2">{{ place.longitude }}</td>
+                    <td class="border border-indigo-200 px-4 py-2">{{ place.city.name }}</td>
+                    <td class="border border-indigo-200 px-4 py-2">
+                        <a href="{{path('app_delete_place', {'id': place.id}) }}" class="hover:underline underline-offset-4 decoration-2 hover:text-red-500 decoration-red-500">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+                {{ form_start(form) }}
+                <td class="border border-indigo-200 px-4 py-2">{{ form_row(form.name, {
+                        'label': false,
+                        'attr': {
+                            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                            'placeholder': 'Nom du lieu'
+                        }
+                    }) }}</td>
+                <td class="border border-indigo-200 px-4 py-2">{{ form_row(form.street, {
+                        'label': false,
+                        'attr': {
+                            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                            'placeholder': 'Rue'
+                        }
+                    }) }}</td>
+                <td class="border border-indigo-200 px-4 py-2">{{ form_row(form.latitude, {
+                        'label': false,
+                        'attr': {
+                            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                            'placeholder': 'Latitude'
+                        }
+                    }) }}</td>
+                <td class="border border-indigo-200 px-4 py-2">{{ form_row(form.longitude, {
+                        'label': false,
+                        'attr': {
+                            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                            'placeholder': 'Longitude'
+                        }
+                    }) }}</td>
+                <td class="border border-indigo-200 px-4 py-2">{{ form_row(form.city, {
+                        'label': false,
+                        'attr': {
+                            'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                            'placeholder': 'Ville'
+                        }
+                    }) }}</td>
+                <td class="border border-indigo-200 px-4 py-2">
+                    <button type="submit" class="bg-gray-700 border-4 border-indigo-200 border-l-indigo-500 border-r-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600">Ajouter</button>
+                </td>
+                {{ form_end(form) }}
+            </tbody>
+        </table>
     </div>
+</section>
 
 {% endblock %}

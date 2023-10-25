@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer les Villes{% endblock %}
+
+{% block body %}
+<section class="w-full flex flex-col items-start mt-10">
+    <h1 class="text-2xl font-bold mb-8 text-center">Gérer les villes</h1>
+    <div class="w-full overflow-y-auto md:max-h-[40rem] ">
+        <table class="w-full break-words border-4 border-t-indigo-200 border-x-indigo-500 shadow">
+            <thead class="w-full sticky bg-gray-700 text-white">
+                <th class="border px-4 py-2">Ville</th>
+                <th class="border px-4 py-2">Code postal</th>
+                <th class="border px-4 py-2">Action</th>
+            </thead>
+
+            <tbody>
+            {% for city in city %}
+                <tr>
+                    <td class="border border-indigo-200 px-4 py-2">{{ city.name }}</td>
+                    <td class="border border-indigo-200 px-4 py-2">{{ city.postalcode }}</td>
+                    <td class="border px-4 py-2">
+                        <a href="{{path('app_delete_city', {'id': city.id}) }}" class="hover:underline underline-offset-4 decoration-2 hover:text-red-500 decoration-red-500">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+                {{ form_start(form) }}
+                    <td class="border border-indigo-200 px-4 py-2">{{ form_row(form.name, {
+                            'label': false,
+                            'attr': {
+                                'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                                'placeholder': 'Nom de la ville'
+                            }
+                        }) }}</td>
+                    <td class="border border-indigo-200 px-4 py-2">{{ form_row(form.postalCode, {
+                            'label': false,
+                            'attr': {
+                                'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                                'placeholder': 'Code postal'
+                            }
+                        }) }}</td>
+                    <td class="border border-indigo-200 px-4 py-2"> <button type="submit" class="bg-gray-700 border-4 border-y-indigo-200 border-x-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600"> Ajouter</button></td>
+                {{ form_end(form) }}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock %}
