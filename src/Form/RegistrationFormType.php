@@ -59,15 +59,7 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('isAdmin', CheckboxType::class)
-            ->add('isActive', CheckboxType::class)
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ]);
+            ->add('isActive', CheckboxType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
