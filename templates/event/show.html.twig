@@ -57,7 +57,7 @@
 			</div>
 		</div>
 		{% if app.user == event.host or is_granted("ROLE_ADMIN") %}
-				<a href="{{path('event_annuler', {'id': event.id})}}" class="text-red-500 decoration-red-500 px-3 py-2 rounded border border-red-500 hover:text-white hover:bg-red-500">Annuler la sortie</a>
+				<a href="{{path('event_annuler', {'id': event.id})}}" class="text-red-500 decoration-red-500 block mt-3 w-fit px-3 py-2 rounded border border-red-500 hover:text-white hover:bg-red-500">Annuler la sortie</a>
 			{% endif %}
 		<h2 class="text-xl font-bold my-4">Liste des participants inscrits :</h2>
 		<div class="overflow-y-auto" style="height: 12.5rem; max-width: 29.375rem">
