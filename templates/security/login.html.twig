@@ -1,38 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Connexion
+{% endblock %}
 
 {% block body %}
-<section class="w-full flex justify-center">
-    <form method="post" class="w-4/5 sm:w-3/5 lg:w-1/4 mt-6">
-        {% if error %}
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                <strong class="font-bold">Oops!</strong>
-                <span class="block sm:inline">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
-            </div>
-        {% endif %}
+	<section class="w-full flex justify-center">
+		<form method="post" class="w-4/5 sm:w-3/5 lg:w-1/4 mt-6">
+			{% if error %}
+				<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+					<strong class="font-bold">Oops!</strong>
+					<span class="block sm:inline">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+				</div>
+			{% endif %}
 
-        <div class="mb-4 flex justify-between items-center">
-            <label for="inputEmail" class="text-gray-700 font-bold">Email</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="shadow border rounded py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline" autocomplete="email" required autofocus>
-        </div>
-        <div class="mb-6 flex justify-between items-center">
-            <label for="inputPassword" class="text-gray-700 font-bold">Mot de passe</label>
-            <input type="password" name="password" id="inputPassword" class="shadow border rounded py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline" autocomplete="current-password" required>
-        </div>
+			<div class="mb-4 flex justify-between items-center">
+				<label for="inputEmail" class="text-gray-700 font-bold">Email</label>
+				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="shadow border rounded py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline" autocomplete="email" required autofocus>
+			</div>
+			<div class="mb-6 flex justify-between items-center">
+				<label for="inputPassword" class="text-gray-700 font-bold">Mot de passe</label>
+				<input type="password" name="password" id="inputPassword" class="shadow border rounded py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline" autocomplete="current-password" required>
+			</div>
 
-        <div class="mb-4 text-center">
-            <input type="checkbox" name="_remember_me" id="remember_me" class="mr-2" {{ last_username is defined ? 'checked' : '' }}>
-            <label for="remember_me" class="text-gray-700 font-bold ">Se souvenir de moi</label>
-        </div>
+			<div class="mb-4 text-center">
+				<input type="checkbox" name="_remember_me" id="remember_me" class="mr-2" {{ last_username is defined ? 'checked' : '' }}>
+				<label for="remember_me" class="text-gray-700 font-bold ">Se souvenir de moi</label>
+			</div>
 
 
-        <div class="mb-4 text-center">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-            <button class="bg-gray-700 border-4 border-y-indigo-200 border-x-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600" type="submit">
-                Connexion
-            </button>
-        </div>
-    </form>
-</section>
+			<div class="mb-4 text-center">
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+				<button class="bg-gray-700 border-4 border-y-indigo-200 border-x-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600" type="submit">
+					Connexion
+				</button>
+				<a href="/reset-password" class="bg-gray-700 border-4 border-y-indigo-200 border-x-indigo-500 text-white rounded-md px-4 py-3 text-sm font-medium hover:bg-gray-600">
+					Mot de passe oublié ?
+				</a>
+			</div>
+		</form>
+	</section>
 {% endblock %}
